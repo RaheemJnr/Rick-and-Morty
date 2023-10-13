@@ -7,7 +7,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 
-const val BASE_URL = "https://woodchuck-server-app.herokuapp.com"
+const val BASE_URL = "https://rickandmortyapi.com/api"
 
 fun httpClient(): HttpClient =
     HttpClient {
