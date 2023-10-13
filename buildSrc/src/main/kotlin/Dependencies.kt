@@ -8,7 +8,11 @@ object Libs {
     object Kotlin {
 //        private const val version = "1.7.0"
 //        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
-        //...
+
+        // val serialization by lazy { "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0" }
+        val ktor_core by lazy { "io.ktor:ktor-client-core:2.3.4" }
+        val content_negotiation by lazy { "io.ktor:ktor-client-content-negotiation:2.3.4" }
+        val serialization by lazy { "io.ktor:ktor-serialization-kotlinx-json:2.3.4" }
     }
 
     object AndroidX {
