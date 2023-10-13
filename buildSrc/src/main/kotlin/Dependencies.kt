@@ -13,7 +13,8 @@ object Libs {
 
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
-        //...
+        val androidx_core by lazy { "androidx.core:core-ktx:1.12.0" }
+        val androidx_lifecycle_runtime by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2" }
 
         object Compose {
             val activity_compose by lazy { "androidx.activity:activity-compose:1.8.0" }
@@ -22,6 +23,10 @@ object Libs {
             val compose_ui_graphics by lazy { "androidx.compose.ui:ui-graphics" }
             val compose_preview by lazy { "androidx.compose.ui:ui-tooling-preview" }
             val compose_material3 by lazy { "androidx.compose.material3:material3" }
+        }
+
+        object Test {
+
         }
     }
 }
