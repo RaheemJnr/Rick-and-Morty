@@ -12,9 +12,10 @@ object Libs {
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.4.1"
+        const val appcompat = "androidx.appcompat:appcompat:1.6.1"
         val androidx_core by lazy { "androidx.core:core-ktx:1.12.0" }
         val androidx_lifecycle_runtime by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2" }
+        val material by lazy { "com.google.android.material:material:1.10.0" }
 
         object Compose {
             val activity_compose by lazy { "androidx.activity:activity-compose:1.8.0" }
@@ -26,6 +27,14 @@ object Libs {
         }
 
         object Test {
+
+            val junit by lazy { "junit:junit:4.13.2" }
+            val androidx_junit by lazy { "androidx.test.ext:junit:1.1.5" }
+            val androidx_espresso_core by lazy { "androidx.test.espresso:espresso-core:3.5.1" }
+            val androidx_test_bom by lazy { "androidx.compose:compose-bom:2023.03.00" }
+            val androidx_ui_test by lazy { "androidx.compose.ui:ui-test-junit4" }
+            val androidx_ui_tooling_test by lazy { "androidx.compose.ui:ui-tooling" }
+            val androidx_ui_test_manifest by lazy { "androidx.compose.ui:ui-test-manifest" }
 
         }
     }
