@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             LaunchedEffect(Unit) {
-                println("result ${request()}")
+                println("result ${request().info}")
             }
         }
     }

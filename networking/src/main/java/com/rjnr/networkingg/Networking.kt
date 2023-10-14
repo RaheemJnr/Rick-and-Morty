@@ -5,9 +5,11 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 const val BASE_URL = "https://rickandmortyapi.com/api/"
@@ -26,6 +28,7 @@ internal fun httpClient(): HttpClient =
         }
     }
 
-suspend fun request(): String {
+suspend fun request(): CharacterResponse {
     return httpClient().get("character").body()
 }
+
