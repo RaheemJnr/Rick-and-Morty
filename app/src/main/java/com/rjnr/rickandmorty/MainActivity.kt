@@ -28,9 +28,8 @@ class MainActivity : ComponentActivity() {
                     Greeting("Android $body")
                 }
             }
-            LaunchedEffect(key1 = "") {
-                val rr = request()
-                body = rr
+            LaunchedEffect(Unit) {
+                println("result ${request()}")
             }
         }
     }

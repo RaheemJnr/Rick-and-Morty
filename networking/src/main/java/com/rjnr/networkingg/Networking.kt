@@ -1,6 +1,7 @@
 package com.rjnr.networkingg
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
@@ -9,7 +10,7 @@ import io.ktor.http.ContentType.Application.Json
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-const val BASE_URL = "https://rickandmortyapi.com/api"
+const val BASE_URL = "https://rickandmortyapi.com/api/"
 
 internal fun httpClient(): HttpClient =
     HttpClient {
@@ -26,5 +27,5 @@ internal fun httpClient(): HttpClient =
     }
 
 suspend fun request(): String {
-    return httpClient().get("character").bodyAsText()
+    return httpClient().get("character").body()
 }
