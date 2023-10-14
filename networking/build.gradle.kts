@@ -39,10 +39,11 @@ dependencies {
     implementation(Libs.AndroidX.appcompat)
     implementation(Libs.AndroidX.material)
 
-    // kotlin serialization
+    // kotlin/ktor
     implementation(Libs.Kotlin.serialization)
     implementation(Libs.Kotlin.ktor_core)
     implementation(Libs.Kotlin.content_negotiation)
+    implementation(Libs.Kotlin.ktor_android_client)
 
     //test
     testImplementation(Libs.AndroidX.Test.junit)

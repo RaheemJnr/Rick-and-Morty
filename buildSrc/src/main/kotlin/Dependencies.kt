@@ -13,6 +13,7 @@ object Libs {
         val ktor_core by lazy { "io.ktor:ktor-client-core:2.3.4" }
         val content_negotiation by lazy { "io.ktor:ktor-client-content-negotiation:2.3.4" }
         val serialization by lazy { "io.ktor:ktor-serialization-kotlinx-json:2.3.4" }
+        val ktor_android_client by lazy { "io.ktor:ktor-client-android:2.3.4" }
     }
 
     object AndroidX {

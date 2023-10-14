@@ -11,23 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.rjnr.networkingg.request
 import com.rjnr.rickandmorty.ui.theme.RickAndMortyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var body = ""
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting("Android $body")
                 }
             }
             LaunchedEffect(key1 = "") {
-
+                val rr = request()
+                body = rr
             }
         }
     }
