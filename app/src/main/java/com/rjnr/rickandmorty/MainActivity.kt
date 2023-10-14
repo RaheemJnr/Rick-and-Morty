@@ -19,6 +19,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             var body = ""
+            LaunchedEffect(Unit) {
+                println("result ${getCharacterRequest().results}")
+            }
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -27,9 +30,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android $body")
                 }
-            }
-            LaunchedEffect(Unit) {
-                println("result ${getCharacterRequest().info}")
             }
         }
     }
