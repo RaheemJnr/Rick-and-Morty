@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.rjnr.networkingg.request
+import com.rjnr.networkingg.getCharacterRequest
 import com.rjnr.rickandmorty.ui.theme.RickAndMortyTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             LaunchedEffect(Unit) {
-                println("result ${request().info}")
+                println("result ${getCharacterRequest().info}")
             }
         }
     }
