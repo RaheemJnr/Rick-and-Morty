@@ -1,22 +1,18 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    //    // serialization
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 android {
-    namespace = "com.rjnr.networking"
+    namespace = "com.rjnr.networkingg"
     compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
-        applicationId = ConfigurationData.applicationId
         minSdk = ConfigurationData.minSdk
-        targetSdk = ConfigurationData.targetSdk
-        versionCode = ConfigurationData.versionCode
-        versionName = ConfigurationData.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
