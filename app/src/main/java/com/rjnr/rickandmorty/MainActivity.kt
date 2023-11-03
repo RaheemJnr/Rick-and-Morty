@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            var body = ""
+            val body = ""
             LaunchedEffect(Unit) {
                 println("result ${getCharacterRequest().results}")
             }
