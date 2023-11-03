@@ -52,6 +52,7 @@ android {
 dependencies {
 
     implementation(project(":networking"))
+    implementation(project(":design"))
 
     implementation(Libs.AndroidX.androidx_core)
     implementation(Libs.AndroidX.androidx_lifecycle_runtime)
