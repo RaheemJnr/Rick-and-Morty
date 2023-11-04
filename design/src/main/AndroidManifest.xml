@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RickAndMorty">
         <activity
-            android:name=".MainActivity"
+            android:name="com.rjnr.design.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.RickAndMorty">

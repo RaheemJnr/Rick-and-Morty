@@ -1,4 +1,4 @@
-package com.rjnr.designn.ui.theme
+package com.rjnr.design.ui.theme
 
 import android.app.Activity
 import android.os.Build

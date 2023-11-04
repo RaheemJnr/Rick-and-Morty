@@ -1,4 +1,4 @@
-package com.rjnr.designn.ui.theme
+package com.rjnr.design.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
