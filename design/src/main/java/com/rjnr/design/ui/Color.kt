@@ -2,6 +2,7 @@ package com.rjnr.design.ui
 
 import androidx.compose.ui.graphics.Color
 
+
 val md_theme_light_primary = Color(0xFFBB1614)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFFDAD5)
