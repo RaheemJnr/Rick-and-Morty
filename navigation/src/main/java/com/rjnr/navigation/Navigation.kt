@@ -11,7 +11,6 @@ import java.util.Stack
  * Extend it when creating a new screen.
  */
 
-
 @Stable
 class Navigation() {
     var currentScreen: Screen? by mutableStateOf(null)

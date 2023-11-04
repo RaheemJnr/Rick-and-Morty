@@ -28,3 +28,9 @@ fun NavigationRoot(
         navGraph(navigation.currentScreen)
     }
 }
+
+
+@Composable
+fun navigation(): Navigation {
+    return localNavigation.current
+}
