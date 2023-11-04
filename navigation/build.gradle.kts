@@ -4,15 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.rjnr.design"
-    compileSdk = ConfigurationData.compileSdk
+    namespace = "com.rjnr.navigation"
+    compileSdk = 33
 
     defaultConfig {
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,26 +30,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
-    //compose
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    implementation(platform(Libs.AndroidX.Compose.compose_bom))
-    implementation(Libs.AndroidX.Compose.compose_material3)
-
-
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.10.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
