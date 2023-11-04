@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
@@ -8,11 +8,11 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.rjnr.screens"
-        minSdk = 27
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+//        applicationId = "com.rjnr.screens"
+//        minSdk = 27
+//        targetSdk = 33
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -51,19 +51,21 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.0")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(Libs.AndroidX.androidx_core)
+    implementation(Libs.AndroidX.androidx_lifecycle_runtime)
+    //compose
+    implementation(Libs.AndroidX.Compose.activity_compose)
+    implementation(platform(Libs.AndroidX.Compose.compose_bom))
+    implementation(Libs.AndroidX.Compose.compose_ui)
+    implementation(Libs.AndroidX.Compose.compose_ui_graphics)
+    implementation(Libs.AndroidX.Compose.compose_preview)
+    implementation(Libs.AndroidX.Compose.compose_material3)
+    //test
+    testImplementation(Libs.AndroidX.Test.junit)
+    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
+    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
+    androidTestImplementation(platform(Libs.AndroidX.Test.androidx_test_bom))
+    androidTestImplementation(Libs.AndroidX.Test.androidx_ui_test)
+    debugImplementation(Libs.AndroidX.Test.androidx_ui_tooling_test)
+    debugImplementation(Libs.AndroidX.Test.androidx_ui_test_manifest)
 }
