@@ -57,12 +57,4 @@ dependencies {
     implementation(Libs.AndroidX.Compose.compose_material3)
 
 
-    //test
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
-    androidTestImplementation(platform(Libs.AndroidX.Test.androidx_test_bom))
-    androidTestImplementation(Libs.AndroidX.Test.androidx_ui_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_tooling_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_test_manifest)
 }

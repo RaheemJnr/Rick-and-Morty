@@ -2,6 +2,7 @@ package com.rjnr.design.ui
 
 import android.app.Activity
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -82,6 +83,8 @@ private val DarkColors = darkColorScheme(
 )
 
 
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Composable
 fun RickAndMortyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
