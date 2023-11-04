@@ -13,11 +13,11 @@ fun NavGraph(screen: Screen?) {
         }
 
         is ListScreen -> {
-            ListScreen()
+            ListScreen(screen = screen)
         }
 
         is DetailScreen -> {
-            DetailScreen()
+            DetailScreen(screen = screen)
 
         }
     }
