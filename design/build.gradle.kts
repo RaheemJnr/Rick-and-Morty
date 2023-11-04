@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
@@ -8,11 +8,10 @@ android {
     compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
-        applicationId = ConfigurationData.applicationId
-        minSdk = ConfigurationData.minSdk
-        targetSdk = ConfigurationData.targetSdk
-        versionCode = ConfigurationData.versionCode
-        versionName = ConfigurationData.versionName
+//        minSdk = ConfigurationData.minSdk
+//        targetSdk = ConfigurationData.targetSdk
+//        versionCode = ConfigurationData.versionCode
+//        versionName = ConfigurationData.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

@@ -1,4 +1,4 @@
-package com.rjnr.design.ui.color
+package com.rjnr.design.ui
 
 import androidx.compose.ui.graphics.Color
 
