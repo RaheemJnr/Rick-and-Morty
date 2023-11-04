@@ -5,10 +5,10 @@ plugins {
 
 android {
     namespace = "com.rjnr.navigation"
-    compileSdk = 33
+    compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
-        minSdk = 26
+        minSdk = ConfigurationData.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
