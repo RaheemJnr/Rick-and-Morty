@@ -6,48 +6,41 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.rjnr.design.ui.RickAndMortyTheme
-import com.rjnr.networkingg.getCharacterRequest
+import com.rjnr.navigation.NavGraph
+import com.rjnr.navigation.Navigation
+import com.rjnr.navigation.NavigationRoot
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val body = ""
-            LaunchedEffect(Unit) {
-                println("result ${getCharacterRequest().results}")
-            }
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android $body")
+                    val navigation = Navigation()
+
+                    NavigationRoot(navigation = navigation) { screen ->
+                        NavGraph(screen = screen)
+
+                    }
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     RickAndMortyTheme {
-        Greeting("Android")
     }
 }
