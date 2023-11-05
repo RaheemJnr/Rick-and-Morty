@@ -1,8 +1,10 @@
-package com.rjnr.navigation
+package com.rjnr.rickandmorty
 
 import androidx.compose.runtime.Composable
-import com.rjnr.screens.ui.screen.DetailScreen
-import com.rjnr.screens.ui.screen.ListScreen
+import com.rjnr.navigation.DetailScreen
+import com.rjnr.navigation.ListScreen
+import com.rjnr.navigation.Screen
+
 
 @Composable
 fun NavGraph(screen: Screen?) {
@@ -13,11 +15,9 @@ fun NavGraph(screen: Screen?) {
         }
 
         is ListScreen -> {
-            ListScreen(screen = screen)
         }
 
         is DetailScreen -> {
-            DetailScreen(screen = screen)
 
         }
     }

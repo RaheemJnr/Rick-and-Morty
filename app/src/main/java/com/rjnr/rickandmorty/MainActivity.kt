@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.rjnr.design.ui.RickAndMortyTheme
-import com.rjnr.navigation.NavGraph
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
 
@@ -28,7 +27,6 @@ class MainActivity : ComponentActivity() {
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
-
                     }
 
                 }
