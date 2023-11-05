@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":screens"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
