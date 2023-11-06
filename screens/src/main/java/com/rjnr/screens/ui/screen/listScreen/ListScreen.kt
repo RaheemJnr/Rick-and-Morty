@@ -1,10 +1,12 @@
 package com.rjnr.screens.ui.screen.listScreen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
@@ -26,8 +28,12 @@ fun ListScreen(screen: ListScreen) {
 
 @Composable
 fun UI(navigation: Navigation) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = " Hiiiiii")
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = " Hiiiiii List Screen")
 
         Button(
             onClick = {

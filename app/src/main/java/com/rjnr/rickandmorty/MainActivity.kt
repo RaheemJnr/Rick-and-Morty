@@ -15,12 +15,16 @@ import com.rjnr.design.ui.RickAndMortyTheme
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
+import com.rjnr.navigation.navigation
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContent {
+            val navigation = Navigation()
+
             val viewModel: MainViewModel = viewModel()
 
             LaunchedEffect(key1 = Unit) {
@@ -32,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navigation = Navigation()
+
 
                     navigation.navigateTo(ListScreen)
 
@@ -44,6 +48,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 
