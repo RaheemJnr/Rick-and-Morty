@@ -7,7 +7,6 @@ import kotlinx.coroutines.launch
 class MainViewModel(
 ) : ViewModel() {
 
-
     fun start() {
         viewModelScope.launch {
 
