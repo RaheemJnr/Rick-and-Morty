@@ -5,7 +5,7 @@ import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Screen
 import com.rjnr.screens.ui.screen.DetailScreen
-import com.rjnr.screens.ui.screen.ListScreen
+import com.rjnr.screens.ui.screen.listScreen.ListScreen
 
 
 @Composable

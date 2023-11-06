@@ -16,7 +16,7 @@ class Navigation() {
     var currentScreen: Screen? by mutableStateOf(null)
         private set
 
-    @Deprecated("Legacy code. Use Compose `BackHandler {}` instead.")
+
     val onBackPressed: MutableMap<Screen, () -> Boolean> = mutableMapOf()
 
     private val backStack: Stack<Screen> = Stack()
