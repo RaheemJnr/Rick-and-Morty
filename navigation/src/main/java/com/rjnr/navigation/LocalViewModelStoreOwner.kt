@@ -12,7 +12,7 @@ import androidx.lifecycle.findViewTreeViewModelStoreOwner
 /**
  * The CompositionLocal containing the current [ViewModelStoreOwner].
  */
-public object LocalViewModelStoreOwner {
+object LocalViewModelStoreOwner {
     private val LocalViewModelStoreOwner =
         compositionLocalOf<ViewModelStoreOwner?> { null }
 
