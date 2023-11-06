@@ -6,6 +6,12 @@ import com.rjnr.navigation.DetailScreen
 
 @Composable
 fun DetailScreen(screen: DetailScreen) {
-    Text(text= "Hii $screen")
+    UI()
+
+}
+
+@Composable
+private fun UI() {
+    Text(text = "Hii details")
 
 }

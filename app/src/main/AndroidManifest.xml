@@ -15,6 +15,12 @@
         android:theme="@style/Theme.RickAndMorty"
         tools:targetApi="31">
         <activity
+            android:name="com.rjnr.design.MainActivity"
+            tools:node="remove" />
+        <activity
+            android:name="com.rjnr.screens.MainActivity"
+            tools:node="remove" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.RickAndMorty">

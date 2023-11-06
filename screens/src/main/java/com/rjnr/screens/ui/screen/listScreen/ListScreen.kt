@@ -1,6 +1,5 @@
 package com.rjnr.screens.ui.screen.listScreen
 
-import androidx.compose.foundation.layout.BoxWithConstraintsScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text

@@ -12,8 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.design.ui.RickAndMortyTheme
+import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
+import com.rjnr.navigation.navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navigation = Navigation()
+
+                    navigation.navigateTo(ListScreen)
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
