@@ -15,7 +15,6 @@ import com.rjnr.design.ui.RickAndMortyTheme
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
-import com.rjnr.navigation.navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

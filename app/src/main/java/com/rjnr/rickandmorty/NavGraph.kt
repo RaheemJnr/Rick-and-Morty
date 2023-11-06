@@ -21,6 +21,7 @@ fun NavGraph(screen: Screen?) {
         }
 
         is DetailScreen -> {
+
             DetailScreen(screen = screen)
 
         }
