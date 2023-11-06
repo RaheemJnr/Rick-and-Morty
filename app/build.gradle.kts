@@ -65,7 +65,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.compose_ui_graphics)
     implementation(Libs.AndroidX.Compose.compose_preview)
     implementation(Libs.AndroidX.Compose.compose_material3)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
     //test
     testImplementation(Libs.AndroidX.Test.junit)
     androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
