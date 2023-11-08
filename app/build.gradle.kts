@@ -52,6 +52,9 @@ android {
 dependencies {
 
     implementation(project(":networking"))
+    implementation(project(":design"))
+    implementation(project(":navigation"))
+    implementation(project(":screens"))
 
     implementation(Libs.AndroidX.androidx_core)
     implementation(Libs.AndroidX.androidx_lifecycle_runtime)
@@ -62,6 +65,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.compose_ui_graphics)
     implementation(Libs.AndroidX.Compose.compose_preview)
     implementation(Libs.AndroidX.Compose.compose_material3)
+    implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
     //test
     testImplementation(Libs.AndroidX.Test.junit)
     androidTestImplementation(Libs.AndroidX.Test.androidx_junit)

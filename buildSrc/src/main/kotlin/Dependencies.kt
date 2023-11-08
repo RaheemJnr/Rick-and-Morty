@@ -29,6 +29,7 @@ object Libs {
             val compose_ui_graphics by lazy { "androidx.compose.ui:ui-graphics" }
             val compose_preview by lazy { "androidx.compose.ui:ui-tooling-preview" }
             val compose_material3 by lazy { "androidx.compose.material3:material3" }
+            val compose_viewmodel_lifecycle by lazy { "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2" }
         }
 
         object Test {

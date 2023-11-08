@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rjnr.networkingg"
+    namespace = "com.rjnr.networking"
     compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
