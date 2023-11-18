@@ -36,8 +36,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
-
                     navigation.navigateTo(ListScreen)
 
                     NavigationRoot(navigation = navigation) { screen ->
