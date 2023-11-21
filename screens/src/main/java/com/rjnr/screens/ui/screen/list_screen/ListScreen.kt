@@ -35,7 +35,7 @@ fun UI(navigation: Navigation) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = " Hiiiiii List Screen",
+            text = " Hi, List Screen",
             style = MaterialTheme.typography.headlineLarge
         )
 
@@ -44,7 +44,6 @@ fun UI(navigation: Navigation) {
                 navigation.navigateTo(DetailScreen)
             }
         ) {
-
             Text(
                 text = "Move to next screen",
                 style = MaterialTheme.typography.bodyMedium

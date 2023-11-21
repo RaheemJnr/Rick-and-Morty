@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.networking"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
         minSdk = ConfigurationData.minSdk

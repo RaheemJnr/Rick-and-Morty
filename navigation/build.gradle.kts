@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.navigation"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
         minSdk = ConfigurationData.minSdk
