@@ -1,4 +1,4 @@
-package com.rjnr.screens.ui.screen.listScreen
+package com.rjnr.screens.ui.screen.list_screen
 
 import androidx.lifecycle.ViewModel
 import com.rjnr.navigation.ListScreen

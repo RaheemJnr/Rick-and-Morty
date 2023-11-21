@@ -1,4 +1,4 @@
-package com.rjnr.screens.ui.screen
+package com.rjnr.screens.ui.screen.detail_screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
