@@ -29,7 +29,9 @@ private fun UI(modifier: Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Hii details")
+        Text(
+            text = "Hi details"
+        )
     }
 
 }
