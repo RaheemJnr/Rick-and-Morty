@@ -11,12 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rjnr.navigation.DetailScreen
+import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 
 @Composable
 fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
     val navigation = navigation()
-    UI(modifier = modifier)
+    UI(modifier = modifier, navigation)
 
 
     BackHandler {
@@ -27,6 +28,7 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
 @Composable
 private fun UI(
     modifier: Modifier,
+    navigation: Navigation
 
 ) {
     Column(
@@ -39,6 +41,7 @@ private fun UI(
         )
         Button(
             onClick = {
+                navigation.onBackPressed()
             }
         ) {
 

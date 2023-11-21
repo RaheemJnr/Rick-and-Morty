@@ -26,7 +26,7 @@ class Navigation() {
         switchScreen(screen)
     }
 
-    fun backStackEmpty() = backStack.empty()
+    private fun backStackEmpty() = backStack.empty()
 
     private fun popBackStack() {
         backStack.pop()
