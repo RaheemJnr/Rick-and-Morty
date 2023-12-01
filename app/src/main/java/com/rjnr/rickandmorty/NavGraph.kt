@@ -26,6 +26,7 @@ fun NavGraph(screen: Screen?) {
 
         }
 
+        else -> {}
     }
 
 }
