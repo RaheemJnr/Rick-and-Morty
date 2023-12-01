@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.navigation"
-    compileSdk = 34
+    compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
 

@@ -24,11 +24,11 @@ fun ListScreen(screen: ListScreen) {
         viewModel.start(screen)
     }
 
-    UI(navigation)
+    List(navigation)
 }
 
 @Composable
-fun UI(navigation: Navigation) {
+fun List(navigation: Navigation) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

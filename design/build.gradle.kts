@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.design"
-    compileSdk = 34
+    compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
 

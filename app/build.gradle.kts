@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.rickandmorty"
-    compileSdk = 34
+    compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
         applicationId = ConfigurationData.applicationId
