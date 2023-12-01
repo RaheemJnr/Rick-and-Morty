@@ -17,7 +17,7 @@ import com.rjnr.navigation.navigation
 @Composable
 fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
     val navigation = navigation()
-    UI(modifier = modifier, navigation)
+    Details(modifier = modifier, navigation)
 
 
     BackHandler {
@@ -26,7 +26,7 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
 }
 
 @Composable
-private fun UI(
+private fun Details(
     modifier: Modifier,
     navigation: Navigation
 
