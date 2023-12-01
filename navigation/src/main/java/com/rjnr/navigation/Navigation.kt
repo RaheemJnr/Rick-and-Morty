@@ -6,10 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.util.Stack
 
-/**
- * Marks a screen in the Ivy Wallet's navigation graph.
- * Extend it when creating a new screen.
- */
 
 @Stable
 class Navigation() {
@@ -30,13 +26,13 @@ class Navigation() {
         switchScreen(screen)
     }
 
-    fun backStackEmpty() = backStack.empty()
+    private fun backStackEmpty() = backStack.empty()
 
     private fun popBackStack() {
         backStack.pop()
     }
 
-    @Deprecated("Legacy code. Don't use it, please.")
+
     fun onBackPressed(): Boolean {
 
         val specialHandling = onBackPressed.getOrDefault(currentScreen) { false }.invoke()

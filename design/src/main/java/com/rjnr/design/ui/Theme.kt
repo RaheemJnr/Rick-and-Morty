@@ -83,7 +83,6 @@ private val DarkColors = darkColorScheme(
 )
 
 
-
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Composable
 fun RickAndMortyTheme(
@@ -112,7 +111,7 @@ fun RickAndMortyTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = RMTypography,
         content = content
     )
 }
