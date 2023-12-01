@@ -1,5 +1,6 @@
-package com.rjnr.screens.ui.screen.list_screen
+package com.rjnr.screens.ui.screen.detail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,47 +10,46 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
-import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
-import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
-fun ListScreen(screen: ListScreen) {
-    val viewModel: ListViewModel = viewModel()
+fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
     val navigation = navigation()
-    onScreenStart {
-        viewModel.start(screen)
-    }
+    Details(modifier = modifier, navigation)
 
-    List(navigation)
+
+    BackHandler {
+        navigation.onBackPressed()
+    }
 }
 
 @Composable
-fun List(navigation: Navigation) {
+private fun Details(
+    modifier: Modifier,
+    navigation: Navigation
+
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = " Hi, List Screen",
-            style = MaterialTheme.typography.headlineLarge
+            text = "Hi, this is the details screen"
         )
-
         Button(
             onClick = {
-                navigation.navigateTo(DetailScreen)
+                navigation.onBackPressed()
             }
         ) {
+
             Text(
-                text = "Move to next screen",
+                text = "Move to List screen",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
     }
-
 
 }

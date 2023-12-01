@@ -1,6 +1,5 @@
-package com.rjnr.screens.ui.screen.detail_screen
+package com.rjnr.screens.ui.screen.list
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,46 +9,47 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
+import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
+import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
+fun ListScreen(screen: ListScreen) {
+    val viewModel: ListViewModel = viewModel()
     val navigation = navigation()
-    Details(modifier = modifier, navigation)
-
-
-    BackHandler {
-        navigation.onBackPressed()
+    onScreenStart {
+        viewModel.start(screen)
     }
+
+    List(navigation)
 }
 
 @Composable
-private fun Details(
-    modifier: Modifier,
-    navigation: Navigation
-
-) {
+fun List(navigation: Navigation) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Hi, this is the details screen"
+            text = " Hi, List Screen",
+            style = MaterialTheme.typography.headlineLarge
         )
+
         Button(
             onClick = {
-                navigation.onBackPressed()
+                navigation.navigateTo(DetailScreen)
             }
         ) {
-
             Text(
-                text = "Move to List screen",
+                text = "Move to next screen",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
     }
+
 
 }
