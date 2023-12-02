@@ -17,6 +17,9 @@ fun NavGraph(screen: Screen?) {
         null -> {
 
         }
+        is OnboardingScreen -> {
+            OnboardingScreen(screen = screen)
+        }
 
         is ListScreen -> {
             ListScreen(screen = screen)
@@ -28,9 +31,7 @@ fun NavGraph(screen: Screen?) {
 
         }
 
-        is OnboardingScreen -> {
-            OnboardingScreen(screen = screen)
-        }
+
     }
 
 }

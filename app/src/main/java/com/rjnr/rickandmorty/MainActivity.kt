@@ -15,6 +15,7 @@ import com.rjnr.design.ui.RickAndMortyTheme
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
+import com.rjnr.navigation.OnboardingScreen
 import com.rjnr.navigation.navigation
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    navigation.navigateTo(ListScreen)
+                    navigation.navigateTo(OnboardingScreen)
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
