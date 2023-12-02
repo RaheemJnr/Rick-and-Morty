@@ -32,7 +32,6 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
     val navigation = navigation()
     RickAndMorty(modifier, navigation)
 
-
 }
 
 @Composable
@@ -86,7 +85,7 @@ private fun RickAndMorty(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun OnboardPrev() {
     NavigationRoot(navigation = Navigation()) {
