@@ -5,8 +5,12 @@ import androidx.annotation.FloatRange
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
@@ -76,3 +80,13 @@ fun wrapperContext(): UiWrapper {
 
 @Composable
 fun wrapperCtx(): UiWrapperImpl = wrapperContext() as UiWrapperImpl
+
+inline fun Modifier.noRippleClickable(
+    crossinline onClick: () -> Unit
+): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }) {
+        onClick()
+    }
+}

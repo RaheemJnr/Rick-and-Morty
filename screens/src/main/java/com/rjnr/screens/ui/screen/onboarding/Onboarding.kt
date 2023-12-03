@@ -6,11 +6,11 @@ import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rjnr.navigation.ListScreen
@@ -40,11 +41,13 @@ import com.rjnr.navigation.NavigationRoot
 import com.rjnr.navigation.Screen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.R
+import com.rjnr.screens.ui.animateXCenterToLeft
 import com.rjnr.screens.ui.lerp
+import com.rjnr.screens.ui.noRippleClickable
 import com.rjnr.screens.ui.springBounceSlow
 import com.rjnr.screens.ui.toDensityDp
 import com.rjnr.screens.ui.toDensityPx
-import com.rjnr.screens.ui.wrapperContext
+import com.rjnr.screens.ui.wrapperCtx
 import kotlin.math.roundToInt
 
 enum class ScreenState {
@@ -59,17 +62,14 @@ fun OnboardingScreen(
     modifier: Modifier = Modifier,
     screenState: ScreenState = ScreenState.NO_SHOW
 ) {
-
     val navigation = navigation()
 
-    var showButton by remember { mutableStateOf(false) }
+    var switchBetweenState by remember { mutableStateOf(true) }
 
-    var internalSwitch by remember { mutableStateOf(true) }
-
-    val wrapper = wrapperContext()
+    val wrapper = wrapperCtx()
 
     val transition = updateTransition(
-        targetState = if (!internalSwitch) ScreenState.SHOW_BUTTON else screenState,
+        targetState = if (!switchBetweenState) ScreenState.SHOW_BUTTON else screenState,
         label = "Splash"
     )
 
@@ -140,68 +140,83 @@ fun OnboardingScreen(
             .systemBarsPadding()
             .navigationBarsPadding(),
     ) {
-        Spacer(Modifier.height(spacerTop))
-        Row(modifier = modifier
-            .wrapContentSize()
-            .layout { measurable, constraints ->
-                val placeable = measurable.measure(constraints)
-                val xSplash = (wrapper.screenWidth / 2f) - (placeable.width / 2)
-                val xLogin = 24.dp.toPx()
+        Column(
 
-                layout(placeable.width, placeable.height) {
-                    placeable.placeRelative(
-                        x = lerp(start = xSplash, xLogin, percentTransition).roundToInt(),
-                        y = 0,
-                    )
-                }
-            }
-            .clickable {
-                internalSwitch = !internalSwitch
-            }
         ) {
-            Image(
-                modifier = modifier
-                    .padding(bottom = 78.dp, end = 12.dp)
-                    .size(
-                        width = logoWidth,
-                        height = logoHeight
-                    )
-                    .clip(CircleShape),
-                painter = painterResource(id = R.drawable.rick),
-                contentScale = ContentScale.FillBounds,
-                contentDescription = "Rick sanchez",
+            Spacer(Modifier.height(spacerTop))
+            Row(modifier = modifier
+                .wrapContentSize()
+                .layout { measurable, constraints ->
+                    val placeable = measurable.measure(constraints)
+                    val xSplash = (wrapper.screenWidth / 2f) - (placeable.width / 2)
+                    val xLogin = 24.dp.toPx()
 
+                    layout(placeable.width, placeable.height) {
+                        placeable.placeRelative(
+                            x = lerp(start = xSplash, xLogin, percentTransition).roundToInt(),
+                            y = 0,
+                        )
+                    }
+                }
+                .noRippleClickable {
+                    switchBetweenState = !switchBetweenState
+                }
+            ) {
+                Image(
+                    modifier = modifier
+                        .padding(bottom = 78.dp, end = 12.dp)
+                        .size(
+                            width = logoWidth,
+                            height = logoHeight
+                        )
+                        .clip(CircleShape),
+                    painter = painterResource(id = R.drawable.rick),
+                    contentScale = ContentScale.FillBounds,
+                    contentDescription = "Rick sanchez",
+
+                    )
+                Text(
+                    modifier = modifier
+                        .padding(top = 72.dp),
+                    text = "&",
+                    style = MaterialTheme.typography.displaySmall,
+
+                    )
+                Image(
+                    modifier = modifier
+                        .padding(top = 78.dp, start = 8.dp)
+                        .size(
+                            width = logoWidth,
+                            height = logoHeight
+                        )
+                        .clip(shape = CircleShape),
+                    painter = painterResource(id = R.drawable.morty),
+                    contentScale = ContentScale.FillBounds,
+                    contentDescription = "Morty"
                 )
+            }
             Spacer(Modifier.height(marginTextTop))
+            val horizontalPadding = if (percentTransition > 0) 58.dp else 8.dp
             Text(
                 modifier = modifier
-                    .padding(top = 72.dp),
-                text = "&",
-                style = MaterialTheme.typography.displaySmall,
-
-                )
-            Image(
-                modifier = modifier
-                    .padding(top = 78.dp, start = 8.dp)
-                    .size(
-                        width = logoWidth,
-                        height = logoHeight
-                    )
-                    .clip(shape = CircleShape),
-                painter = painterResource(id = R.drawable.morty),
-                contentScale = ContentScale.FillBounds,
-                contentDescription = "Morty"
+                    .animateXCenterToLeft(
+                        wrapper = wrapper,
+                        percentTransition = percentTransition
+                    ),
+                softWrap = true,
+                text = "Welcome to the Rick and Morty Character App",
+                fontWeight = FontWeight.ExtraBold,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
             )
-        }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        }
         LoginSection(
             navigation = navigation,
             modifier = modifier,
             percentTransition = percentTransition
         )
-
     }
+
 }
 
 
@@ -216,15 +231,11 @@ private fun LoginSection(
             modifier = Modifier
                 .alpha(percentTransition),
         ) {
-            Spacer(Modifier.height(16.dp))
             Spacer(Modifier.weight(1f))
-
-
-            Spacer(Modifier.height(16.dp))
-
-
             Button(
-                modifier = modifier.padding(top = 22.dp),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp),
                 onClick = {
                     navigation.navigateTo(ListScreen)
                 }
