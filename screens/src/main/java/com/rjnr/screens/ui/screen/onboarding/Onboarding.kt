@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,14 +47,19 @@ import com.rjnr.screens.ui.toDensityDp
 import com.rjnr.screens.ui.toDensityPx
 import com.rjnr.screens.ui.wrapperContext
 import kotlin.math.roundToInt
-enum class ScreenState{
+
+enum class ScreenState {
     SHOW_BUTTON,
     NO_SHOW
 }
 
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Composable
-fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier, screenState: ScreenState = ScreenState.NO_SHOW) {
+fun OnboardingScreen(
+    screen: Screen,
+    modifier: Modifier = Modifier,
+    screenState: ScreenState = ScreenState.NO_SHOW
+) {
 
     val navigation = navigation()
 
@@ -112,7 +118,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier, screenState:
     ) {
         when (it) {
             ScreenState.NO_SHOW -> {
-                ( wrapper.screenHeight / 2f - logoHeight.toDensityPx() / 2f).toDensityDp()
+                (wrapper.screenHeight / 2f - logoHeight.toDensityPx() / 2f).toDensityDp()
             }
 
             else -> 56.dp
@@ -142,15 +148,11 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier, screenState:
         Row {
 
             Image(
-                painter = painterResource(id = R.drawable.rick),
-                contentDescription = "Rick sanchez",
                 modifier = Modifier
-                    .padding(bottom = 78.dp, end = 12.dp)
-                    .clip(shape = CircleShape)
-
-                    .clickable {
-                        internalSwitch = !internalSwitch
-                    }
+                    .size(
+                        width = logoWidth,
+                        height = logoHeight
+                    )
                     .layout { measurable, constraints ->
                         val placeable = measurable.measure(constraints)
                         val xSplash = wrapper.screenWidth / 2f - placeable.width / 2
@@ -163,18 +165,28 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier, screenState:
                             )
                         }
                     }
-            )
+                    .clickable {
+                        internalSwitch = !internalSwitch
+                    }
+                    .padding(bottom = 78.dp, end = 12.dp)
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = R.drawable.rick),
+                contentScale = ContentScale.FillBounds,
+                contentDescription = "Rick sanchez",
+
+                )
             Spacer(Modifier.height(marginTextTop))
             Text(
-                text = "&",
-                style = MaterialTheme.typography.displaySmall,
                 modifier = modifier
                     .animateXCenterToLeft(
                         percentTransition = percentTransition,
                         wrapper = wrapper
                     )
-                    .padding(top = 72.dp)
-            )
+                    .padding(top = 72.dp),
+                text = "&",
+                style = MaterialTheme.typography.displaySmall,
+
+                )
 
             Image(
                 painter = painterResource(id = R.drawable.morty),
@@ -228,11 +240,14 @@ private fun RickAndMorty(
 ) {
 }
 
+@RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Preview(showBackground = true)
 @Composable
 fun OnboardPrev() {
     NavigationRoot(navigation = Navigation()) {
-        RickAndMorty(modifier = Modifier, navigation = navigation())
+        if (it != null) {
+            OnboardingScreen(screen = it)
+        }
     }
 
 }
