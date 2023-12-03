@@ -7,7 +7,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +16,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +26,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
@@ -40,7 +40,6 @@ import com.rjnr.navigation.NavigationRoot
 import com.rjnr.navigation.Screen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.R
-import com.rjnr.screens.ui.animateXCenterToLeft
 import com.rjnr.screens.ui.lerp
 import com.rjnr.screens.ui.springBounceSlow
 import com.rjnr.screens.ui.toDensityDp
@@ -140,36 +139,34 @@ fun OnboardingScreen(
             .fillMaxSize()
             .systemBarsPadding()
             .navigationBarsPadding(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
         Spacer(Modifier.height(spacerTop))
+        Row(modifier = modifier
+            .wrapContentSize()
+            .layout { measurable, constraints ->
+                val placeable = measurable.measure(constraints)
+                val xSplash = (wrapper.screenWidth / 2f) - (placeable.width / 2)
+                val xLogin = 24.dp.toPx()
 
-        Row {
-
+                layout(placeable.width, placeable.height) {
+                    placeable.placeRelative(
+                        x = lerp(start = xSplash, xLogin, percentTransition).roundToInt(),
+                        y = 0,
+                    )
+                }
+            }
+            .clickable {
+                internalSwitch = !internalSwitch
+            }
+        ) {
             Image(
-                modifier = Modifier
+                modifier = modifier
+                    .padding(bottom = 78.dp, end = 12.dp)
                     .size(
                         width = logoWidth,
                         height = logoHeight
                     )
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(constraints)
-                        val xSplash = wrapper.screenWidth / 2f - placeable.width / 2
-                        val xLogin = 24.dp.toPx()
-
-                        layout(placeable.width, placeable.height) {
-                            placeable.placeRelative(
-                                x = lerp(xSplash, xLogin, percentTransition).roundToInt(),
-                                y = 0,
-                            )
-                        }
-                    }
-                    .clickable {
-                        internalSwitch = !internalSwitch
-                    }
-                    .padding(bottom = 78.dp, end = 12.dp)
-                    .clip(shape = CircleShape),
+                    .clip(CircleShape),
                 painter = painterResource(id = R.drawable.rick),
                 contentScale = ContentScale.FillBounds,
                 contentDescription = "Rick sanchez",
@@ -178,56 +175,65 @@ fun OnboardingScreen(
             Spacer(Modifier.height(marginTextTop))
             Text(
                 modifier = modifier
-                    .animateXCenterToLeft(
-                        percentTransition = percentTransition,
-                        wrapper = wrapper
-                    )
                     .padding(top = 72.dp),
                 text = "&",
                 style = MaterialTheme.typography.displaySmall,
 
                 )
-
             Image(
-                painter = painterResource(id = R.drawable.morty),
-                contentDescription = "Morty",
                 modifier = modifier
                     .padding(top = 78.dp, start = 8.dp)
-                    .clip(shape = CircleShape)
                     .size(
                         width = logoWidth,
                         height = logoHeight
                     )
-                    .clickable {
-                        internalSwitch = !internalSwitch
-                    }
-                    .layout { measurable, constraints ->
-                        val placeable = measurable.measure(constraints)
-                        val xSplash = wrapper.screenWidth / 2f - placeable.width / 2
-                        val xLogin = 24.dp.toPx()
-
-                        layout(placeable.width, placeable.height) {
-                            placeable.placeRelative(
-                                x = lerp(xSplash, xLogin, percentTransition).roundToInt(),
-                                y = 0,
-                            )
-                        }
-                    }
+                    .clip(shape = CircleShape),
+                painter = painterResource(id = R.drawable.morty),
+                contentScale = ContentScale.FillBounds,
+                contentDescription = "Morty"
             )
         }
 
         Spacer(modifier = Modifier.height(8.dp))
+        LoginSection(
+            navigation = navigation,
+            modifier = modifier,
+            percentTransition = percentTransition
+        )
 
-        Button(
-            modifier = modifier.padding(top = 22.dp),
-            onClick = {
-                navigation.navigateTo(ListScreen)
-            }
+    }
+}
+
+
+@Composable
+private fun LoginSection(
+    navigation: Navigation,
+    modifier: Modifier,
+    percentTransition: Float,
+) {
+    if (percentTransition > 0.01f) {
+        Column(
+            modifier = Modifier
+                .alpha(percentTransition),
         ) {
-            Text(
-                text = "Move to next screen",
-                style = MaterialTheme.typography.bodyMedium
-            )
+            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.weight(1f))
+
+
+            Spacer(Modifier.height(16.dp))
+
+
+            Button(
+                modifier = modifier.padding(top = 22.dp),
+                onClick = {
+                    navigation.navigateTo(ListScreen)
+                }
+            ) {
+                Text(
+                    text = "Move to next screen",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }
