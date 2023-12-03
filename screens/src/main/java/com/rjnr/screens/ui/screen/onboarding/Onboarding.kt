@@ -40,18 +40,20 @@ import com.rjnr.navigation.Screen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.R
 import com.rjnr.screens.ui.animateXCenterToLeft
-import com.rjnr.screens.ui.calculateScreenWidth
 import com.rjnr.screens.ui.lerp
-import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 import com.rjnr.screens.ui.springBounceSlow
 import com.rjnr.screens.ui.toDensityDp
 import com.rjnr.screens.ui.toDensityPx
+import com.rjnr.screens.ui.wrapperContext
 import kotlin.math.roundToInt
-
+enum class ScreenState{
+    SHOW_BUTTON,
+    NO_SHOW
+}
 
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Composable
-fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
+fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier, screenState: ScreenState = ScreenState.NO_SHOW) {
 
     val navigation = navigation()
 
@@ -59,10 +61,10 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
 
     var internalSwitch by remember { mutableStateOf(true) }
 
-    val wrapper = UiWrapperImpl()
+    val wrapper = wrapperContext()
 
     val transition = updateTransition(
-        targetState = if (!internalSwitch) showButton = true else showButton,
+        targetState = if (!internalSwitch) ScreenState.SHOW_BUTTON else screenState,
         label = "Splash"
     )
 
@@ -73,7 +75,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
         label = "percentTransition"
     ) {
         when (it) {
-            it -> 0f
+            ScreenState.NO_SHOW -> 0f
             else -> 1f
         }
     }
@@ -85,7 +87,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
         label = "logoHeight"
     ) {
         when (it) {
-            it -> 96.dp
+            ScreenState.NO_SHOW -> 96.dp
             else -> 64.dp
         }
     }
@@ -97,7 +99,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
         label = "logoWidth"
     ) {
         when (it) {
-            it -> 113.dp
+            ScreenState.NO_SHOW -> 113.dp
             else -> 76.dp
         }
     }
@@ -109,7 +111,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
         label = "spacerTop"
     ) {
         when (it) {
-            it -> {
+            ScreenState.NO_SHOW -> {
                 ( wrapper.screenHeight / 2f - logoHeight.toDensityPx() / 2f).toDensityDp()
             }
 
@@ -123,7 +125,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
         label = "marginTextTop"
     ) {
         when (it) {
-            it -> 64.dp
+            ScreenState.NO_SHOW -> 64.dp
             else -> 40.dp
         }
     }
@@ -145,10 +147,7 @@ fun OnboardingScreen(screen: Screen, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(bottom = 78.dp, end = 12.dp)
                     .clip(shape = CircleShape)
-                    .size(
-                        width = logoWidth,
-                        height = logoHeight
-                    )
+
                     .clickable {
                         internalSwitch = !internalSwitch
                     }
