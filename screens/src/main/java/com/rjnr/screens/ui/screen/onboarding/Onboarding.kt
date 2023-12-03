@@ -22,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +49,7 @@ import com.rjnr.screens.ui.springBounceSlow
 import com.rjnr.screens.ui.toDensityDp
 import com.rjnr.screens.ui.toDensityPx
 import com.rjnr.screens.ui.wrapperCtx
+import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 enum class ScreenState {
@@ -55,14 +57,16 @@ enum class ScreenState {
     NO_SHOW
 }
 
+
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Composable
 fun OnboardingScreen(
     screen: Screen,
     modifier: Modifier = Modifier,
-    screenState: ScreenState = ScreenState.NO_SHOW
-) {
+
+    ) {
     val navigation = navigation()
+    var screenState:ScreenState by remember { mutableStateOf(ScreenState.NO_SHOW) }
 
     var switchBetweenState by remember { mutableStateOf(true) }
 
@@ -134,6 +138,14 @@ fun OnboardingScreen(
             else -> 40.dp
         }
     }
+
+    LaunchedEffect(key1 = screenState) {
+        if (screenState == ScreenState.NO_SHOW) {
+            delay(1000)
+            screenState = ScreenState.SHOW_BUTTON
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -251,13 +263,6 @@ private fun LoginSection(
     }
 }
 
-
-@Composable
-private fun RickAndMorty(
-    modifier: Modifier,
-    navigation: Navigation
-) {
-}
 
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Preview(showBackground = true)
