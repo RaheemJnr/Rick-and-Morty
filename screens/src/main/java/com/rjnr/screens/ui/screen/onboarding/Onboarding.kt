@@ -226,12 +226,12 @@ private fun LoginSection(
     modifier: Modifier,
     percentTransition: Float,
 ) {
-    if (percentTransition > 0.01f) {
+    if (percentTransition > 0.02f) {
         Column(
             modifier = Modifier
                 .alpha(percentTransition),
         ) {
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(2f))
             Button(
                 modifier = modifier
                     .fillMaxWidth()
@@ -245,6 +245,8 @@ private fun LoginSection(
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
+            Spacer(Modifier.weight(3f))
+            Spacer(Modifier.height(16.dp))
         }
     }
 }
