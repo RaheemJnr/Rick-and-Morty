@@ -121,7 +121,7 @@ fun OnboardingScreen(
     ) {
         when (it) {
             ScreenState.NO_SHOW -> {
-                (wrapper.screenHeight / 2f - logoHeight.toDensityPx() / 2f).toDensityDp()
+                (wrapper.screenHeight!! / 2f - logoHeight.toDensityPx() / 2f).toDensityDp()
             }
 
             else -> 56.dp
@@ -160,8 +160,8 @@ fun OnboardingScreen(
                 .wrapContentSize()
                 .layout { measurable, constraints ->
                     val placeable = measurable.measure(constraints)
-                    val xSplash = (wrapper.screenWidth / 2f) - (placeable.width / 2)
-                    val xLogin = 24.dp.toPx()
+                    val xSplash = (wrapper.screenWidth!! / 2f) - (placeable.width / 2)
+                    val xLogin = 204.dp.toPx()
 
                     layout(placeable.width, placeable.height) {
                         placeable.placeRelative(
@@ -179,7 +179,7 @@ fun OnboardingScreen(
                         .padding(bottom = 78.dp, end = 12.dp)
                         .size(
                             width = logoWidth,
-                            height = logoHeight
+                            height = logoWidth
                         )
                         .clip(CircleShape),
                     painter = painterResource(id = R.drawable.rick),
@@ -199,7 +199,7 @@ fun OnboardingScreen(
                         .padding(top = 78.dp, start = 8.dp)
                         .size(
                             width = logoWidth,
-                            height = logoHeight
+                            height = logoWidth
                         )
                         .clip(shape = CircleShape),
                     painter = painterResource(id = R.drawable.morty),
@@ -208,7 +208,6 @@ fun OnboardingScreen(
                 )
             }
             Spacer(Modifier.height(marginTextTop))
-            val horizontalPadding = if (percentTransition > 0) 58.dp else 8.dp
             Text(
                 modifier = modifier
                     .animateXCenterToLeft(
@@ -222,7 +221,7 @@ fun OnboardingScreen(
             )
 
         }
-        LoginSection(
+        NavButton(
             navigation = navigation,
             modifier = modifier,
             percentTransition = percentTransition
@@ -233,7 +232,7 @@ fun OnboardingScreen(
 
 
 @Composable
-private fun LoginSection(
+private fun NavButton(
     navigation: Navigation,
     modifier: Modifier,
     percentTransition: Float,
@@ -253,8 +252,8 @@ private fun LoginSection(
                 }
             ) {
                 Text(
-                    text = "Move to next screen",
-                    style = MaterialTheme.typography.bodyMedium
+                    text = "Explore",
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
             Spacer(Modifier.weight(3f))

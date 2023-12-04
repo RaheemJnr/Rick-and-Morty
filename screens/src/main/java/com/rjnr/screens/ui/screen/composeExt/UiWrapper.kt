@@ -10,46 +10,44 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 
-
+// Interface representing a screen wrapper
 interface IScreenWrapper {
     fun uiWrapper(): UiWrapper
 }
 
-abstract class ScreenWrapper() : IScreenWrapper {
+// Abstract class implementing IScreenWrapper
+abstract class ScreenWrapper : IScreenWrapper
 
-}
-
+// Abstract class representing a UI wrapper
 abstract class UiWrapper {
+    // Nullable properties for screen dimensions, with null checks in the getters
+    var screenWidth: Int? = null
+        get() = field ?: throw IllegalStateException("screenWidth not initialized")
 
-    var screenWidth: Int = -1
-        get() {
-            return if (field > 0) field else throw IllegalStateException("screenWidth not initialized")
-        }
-
-    var screenHeight: Int = -1
-        get() {
-            return if (field > 0) field else throw IllegalStateException("screenHeight not initialized")
-        }
-
+    var screenHeight: Int? = null
+        get() = field ?: throw IllegalStateException("screenHeight not initialized")
 }
 
-
+// CompositionLocal key for accessing UiWrapper in Compose
 val LocalRMContext = compositionLocalOf<UiWrapper> { error("No LocalIvyContext") }
 
+// Composable function for wrapping UI with screen dimensions and a surface
 @Composable
 fun RMUIWrapper(
     screenWrapper: IScreenWrapper,
     includeSurface: Boolean = true,
     content: @Composable BoxWithConstraintsScope.() -> Unit
 ) {
+    // Get the UiWrapper from the IScreenWrapper
     val wrapper = screenWrapper.uiWrapper()
 
-    CompositionLocalProvider(
-        LocalRMContext provides wrapper,
-    ) {
-
-        WrapWithSurface(includeSurface = includeSurface) {
+    // Provide the UiWrapper through CompositionLocal
+    CompositionLocalProvider(LocalRMContext provides wrapper) {
+        // Wrap with surface if specified
+        WrapWithSurface {
+            // BoxWithConstraints to get the screen dimensions
             BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+                // Set screen dimensions in UiWrapper based on the constraints
                 wrapper.screenWidth = with(LocalDensity.current) {
                     maxWidth.roundToPx()
                 }
@@ -57,23 +55,19 @@ fun RMUIWrapper(
                     maxHeight.roundToPx()
                 }
 
+                // Call the content lambda with the screen dimensions
                 content()
             }
         }
-
     }
 }
 
+
 @Composable
 private fun WrapWithSurface(
-    includeSurface: Boolean,
     content: @Composable () -> Unit,
 ) {
-    if (includeSurface) {
-        Surface {
-            content()
-        }
-    } else {
+    Surface {
         content()
     }
 }

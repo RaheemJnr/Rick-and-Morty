@@ -19,7 +19,7 @@ import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 
 class MainActivity : ComponentActivity() {
 
-    val wrapper:UiWrapper = UiWrapperImpl()
+    val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,13 +34,13 @@ class MainActivity : ComponentActivity() {
             }
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
-                RMUIWrapper(screenWrapper = appDesign(context = wrapper)) {
-                navigation.navigateTo(OnboardingScreen)
+                RMUIWrapper(screenWrapper = createScreenWrapper(context = wrapper)) {
+                    navigation.navigateTo(OnboardingScreen)
 
-                NavigationRoot(navigation = navigation) { screen ->
-                    NavGraph(screen = screen)
+                    NavigationRoot(navigation = navigation) { screen ->
+                        NavGraph(screen = screen)
+                    }
                 }
-            }
 
 
             }
@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun appDesign(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
+// Function to create an IScreenWrapper with a given UiWrapper context
+fun createScreenWrapper(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
     override fun uiWrapper(): UiWrapper = context
 }
 
