@@ -66,7 +66,7 @@ fun OnboardingScreen(
 
     ) {
     val navigation = navigation()
-    var screenState:ScreenState by remember { mutableStateOf(ScreenState.NO_SHOW) }
+    var screenState: ScreenState by remember { mutableStateOf(ScreenState.NO_SHOW) }
 
     var switchBetweenState by remember { mutableStateOf(true) }
 
