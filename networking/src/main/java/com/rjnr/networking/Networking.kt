@@ -1,4 +1,4 @@
-package com.rjnr.networkingg
+package com.rjnr.networking
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

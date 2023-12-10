@@ -6,12 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.util.Stack
 
-
 @Stable
 class Navigation() {
     var currentScreen: Screen? by mutableStateOf(null)
         private set
-
 
     val onBackPressed: MutableMap<Screen, () -> Boolean> = mutableMapOf()
 
@@ -32,9 +30,7 @@ class Navigation() {
         backStack.pop()
     }
 
-
     fun onBackPressed(): Boolean {
-
         val specialHandling = onBackPressed.getOrDefault(currentScreen) { false }.invoke()
         return specialHandling || back()
     }

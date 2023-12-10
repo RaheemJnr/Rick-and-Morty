@@ -1,4 +1,4 @@
-package com.rjnr.networkingg
+package com.rjnr.networking
 
 import org.junit.Test
 
