@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Screen
-import com.rjnr.screens.ui.screen.detail_screen.DetailScreen
-import com.rjnr.screens.ui.screen.list_screen.ListScreen
+import com.rjnr.screens.ui.screen.detailScreen.DetailScreen
+import com.rjnr.screens.ui.screen.listScreen.ListScreen
 
 
 @Composable

@@ -20,7 +20,6 @@ import com.rjnr.navigation.navigation
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContent {
             val navigation = Navigation()
@@ -34,22 +33,18 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     navigation.navigateTo(ListScreen)
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
                     }
-
                 }
             }
         }
     }
-
-
 }
-
 
 @Preview(showBackground = true)
 @Composable

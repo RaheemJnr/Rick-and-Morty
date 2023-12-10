@@ -2,11 +2,10 @@ package com.rjnr.networkingg
 
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 data class CharacterResponse(
     val info: Info,
-    val results: List<Character>
+    val results: List<Character>,
 )
 
 @Serializable
@@ -14,7 +13,7 @@ data class Info(
     val count: Int,
     val pages: Int,
     val next: String?,
-    val prev: String?
+    val prev: String?,
 )
 
 @Serializable
@@ -30,11 +29,11 @@ data class Character(
     val image: String,
     val episode: List<String>,
     val url: String,
-    val created: String
+    val created: String,
 )
 
 @Serializable
 data class Location(
     val name: String,
-    val url: String
+    val url: String,
 )
