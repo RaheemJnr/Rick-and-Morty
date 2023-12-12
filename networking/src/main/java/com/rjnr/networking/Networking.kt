@@ -13,11 +13,13 @@ const val BASE_URL = "https://rickandmortyapi.com/api/"
 internal fun httpClient(): HttpClient =
     HttpClient {
         install(ContentNegotiation) {
-            json(Json {
-                prettyPrint = true
-                isLenient = true
-                ignoreUnknownKeys = true
-            })
+            json(
+                Json {
+                    prettyPrint = true
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                },
+            )
         }
         defaultRequest {
             url(BASE_URL)
@@ -27,4 +29,3 @@ internal fun httpClient(): HttpClient =
 suspend fun getCharacterRequest(): CharacterResponse {
     return httpClient().get("character").body()
 }
-
