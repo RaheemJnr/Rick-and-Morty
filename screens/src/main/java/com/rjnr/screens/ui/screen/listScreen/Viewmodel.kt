@@ -1,5 +1,6 @@
 package com.rjnr.screens.ui.screen.listScreen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 const val PAGE_SIZE = 20
 
 data class UIDataState(
+    val loading: Boolean = true,
     val character: CharacterResponse? = null,
 )
 
@@ -27,25 +29,35 @@ class ListViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),
 ) : ViewModel() {
+
+    val page = mutableIntStateOf(1)
+    private var itemListScrollPosition = 0
     val character: MutableState<List<CharacterResponse>> = mutableStateOf(ArrayList())
+    private val _uiState = MutableStateFlow(UIDataState())
+    val uiState: StateFlow<UIDataState> = _uiState.asStateFlow()
 
     init {
         start()
     }
 
-    private val _uiState = MutableStateFlow(UIDataState())
-    val uiState: StateFlow<UIDataState> = _uiState.asStateFlow()
-
-    val page = mutableIntStateOf(1)
-    var itemListScrollPosition = 0
-
     fun start() {
         viewModelScope.launch {
-            val result = repo.getAllCharacters()
-            _uiState.update { characterResponse ->
-                characterResponse.copy(character = result.toEntity())
+            try {
+                _uiState.update { state ->
+                    state.copy(loading = true)
+                }
+                val result = repo.getAllCharacters(page = page.intValue)
+                _uiState.update { characterResponse ->
+                    characterResponse.copy(character = result.toEntity(), loading = false)
+                }
+            } catch (e: Exception) {
+                _uiState.update { state ->
+                    state.copy(loading = false)
+                }
+                Log.e("emitting failure data", e.toString())
             }
         }
+
         // nav.onBackPressed[screen]
     }
 
@@ -55,22 +67,27 @@ class ListViewModel(
             // page * Page size(20 at the start) if true fetch new data
             if ((itemListScrollPosition + 1) >= (page.intValue * PAGE_SIZE)) {
                 // add loading to true
+                _uiState.update { state ->
+                    state.copy(loading = true)
+                }
                 incrementPage()
                 // to show loading
                 delay(1000)
 
                 if (page.intValue > 1) {
-                    val result = repo.getAllCharacters()
-                    appendNewItems(listOf(result.toEntity()))
+                    val result = repo.getAllCharacters(page = page.intValue)
+                    appendNewItems(result.toEntity())
                 }
-                // disable loading
+                _uiState.update { state ->
+                    state.copy(loading = false)
+                }
             }
         }
     }
 
-    private fun appendNewItems(items: List<CharacterResponse>) {
+    private fun appendNewItems(items: CharacterResponse) {
         val currentList = ArrayList(this.character.value)
-        currentList.addAll(items)
+        currentList.addAll(listOf(items))
         this.character.value = currentList
     }
 

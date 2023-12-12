@@ -28,7 +28,7 @@ internal fun httpClient(): HttpClient =
         }
     }
 
-suspend fun getAllCharacterRequest(page: Int = 1): CharacterResponseDTO {
+suspend fun getAllCharacterRequest(page: Int): CharacterResponseDTO {
     return httpClient().get("?page=$page").body()
 }
 

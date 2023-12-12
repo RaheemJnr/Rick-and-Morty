@@ -18,30 +18,53 @@ import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
+import com.rjnr.screens.ui.domain.CharacterResponse
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
 fun ListScreen(screen: ListScreen) {
     val viewModel: ListViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
+    val page = viewModel.page.intValue
+    val character = viewModel.character.value
     val nav = navigation()
     onScreenStart {
         viewModel.start()
     }
-    List(navigation = nav, state = uiState)
+    List(
+        navigation = nav,
+        state = uiState,
+        character = character,
+        viewModel = ListViewModel(),
+        page = page,
+    )
 }
 
 @Composable
-fun List(navigation: Navigation, state: UIDataState) {
+fun List(
+    navigation: Navigation,
+    state: UIDataState,
+    viewModel: ListViewModel,
+    character: List<CharacterResponse>,
+    page: Int,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LazyColumn() {
-            state.character?.let {
-                itemsIndexed(it.results) { _, item ->
-                    ListView(uiState = item)
+            if (state.loading && character.isEmpty()) {
+                item {
+                    Text(text = "Loading")
+                }
+            } else {
+                itemsIndexed(character) { index, item ->
+                    viewModel.onChangeItemScrollPosition(index)
+                    ListView(uiState = item.results)
+                    if ((index + 1) >= (page * PAGE_SIZE) && !state.loading) {
+                        viewModel.nextPage()
+                    }
                 }
             }
         }
