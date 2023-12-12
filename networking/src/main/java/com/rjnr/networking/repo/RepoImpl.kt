@@ -1,10 +1,10 @@
 package com.rjnr.networking.repo
 
-import com.rjnr.networking.model.CharacterResponse
 import com.rjnr.networking.getCharacterRequest
+import com.rjnr.networking.model.CharacterResponseDTO
 
 class RepoImpl() : Repo {
-    override suspend fun getCharacter(): CharacterResponse {
+    override suspend fun getCharacter(): CharacterResponseDTO {
         return getCharacterRequest()
     }
 }

@@ -17,7 +17,7 @@ import coil.compose.AsyncImage
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
-import com.rjnr.networking.model.Character
+import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable

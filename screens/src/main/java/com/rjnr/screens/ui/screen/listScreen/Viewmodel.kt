@@ -6,10 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rjnr.navigation.Navigation
-import com.rjnr.networking.model.CharacterResponse
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.CharacterResponse
+import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +43,7 @@ class ListViewModel(
         viewModelScope.launch {
             val result = repo.getCharacter()
             _uiState.update { characterResponse ->
-                characterResponse.copy(character = result)
+                characterResponse.copy(character = result.toEntity())
             }
         }
         // nav.onBackPressed[screen]
@@ -61,7 +61,7 @@ class ListViewModel(
 
                 if (page.intValue > 1) {
                     val result = repo.getCharacter()
-                    appendNewItems(listOf(result))
+                    appendNewItems(listOf(result.toEntity()))
                 }
                 // disable loading
             }

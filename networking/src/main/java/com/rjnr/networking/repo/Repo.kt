@@ -1,7 +1,7 @@
 package com.rjnr.networking.repo
 
-import com.rjnr.networking.model.CharacterResponse
+import com.rjnr.networking.model.CharacterResponseDTO
 
 interface Repo {
-    suspend fun getCharacter(): CharacterResponse
+    suspend fun getCharacter(): CharacterResponseDTO
 }
