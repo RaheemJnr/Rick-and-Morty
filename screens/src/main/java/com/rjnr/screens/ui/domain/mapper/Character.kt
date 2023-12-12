@@ -19,3 +19,4 @@ fun CharacterDTO.toEntity(): Character {
         created = created,
     )
 }
+

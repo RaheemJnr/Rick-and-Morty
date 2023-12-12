@@ -41,7 +41,7 @@ class ListViewModel(
 
     fun start() {
         viewModelScope.launch {
-            val result = repo.getCharacter()
+            val result = repo.getAllCharacters()
             _uiState.update { characterResponse ->
                 characterResponse.copy(character = result.toEntity())
             }
@@ -60,7 +60,7 @@ class ListViewModel(
                 delay(1000)
 
                 if (page.intValue > 1) {
-                    val result = repo.getCharacter()
+                    val result = repo.getAllCharacters()
                     appendNewItems(listOf(result.toEntity()))
                 }
                 // disable loading

@@ -1,5 +1,6 @@
 package com.rjnr.networking
 
+import com.rjnr.networking.model.CharacterDTO
 import com.rjnr.networking.model.CharacterResponseDTO
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -27,6 +28,10 @@ internal fun httpClient(): HttpClient =
         }
     }
 
-suspend fun getCharacterRequest(page: Int = 1): CharacterResponseDTO {
+suspend fun getAllCharacterRequest(page: Int = 1): CharacterResponseDTO {
     return httpClient().get("?page=$page").body()
+}
+
+suspend fun getSingleCharacterRequest(id: Int): CharacterDTO {
+    return httpClient().get("$id").body()
 }

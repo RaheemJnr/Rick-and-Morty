@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 android {
@@ -62,8 +61,6 @@ dependencies {
     implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
     // coil image
     implementation("io.coil-kt:coil-compose:2.5.0")
-    // serializable
-    implementation(Libs.Kotlin.serialization)
 
     implementation(project(":networking"))
     // test
