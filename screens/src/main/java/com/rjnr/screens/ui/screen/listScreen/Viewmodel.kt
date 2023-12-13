@@ -1,15 +1,13 @@
 package com.rjnr.screens.ui.screen.listScreen
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rjnr.navigation.Navigation
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
-import com.rjnr.screens.ui.domain.CharacterResponse
+import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +20,7 @@ const val PAGE_SIZE = 20
 
 data class UIDataState(
     val loading: Boolean = true,
-    val character: CharacterResponse? = null,
+    val character: List<Character> = ArrayList(),
 )
 
 class ListViewModel(
@@ -32,7 +30,6 @@ class ListViewModel(
 
     val page = mutableIntStateOf(1)
     private var itemListScrollPosition = 0
-    val character: MutableState<List<CharacterResponse>> = mutableStateOf(ArrayList())
     private val _uiState = MutableStateFlow(UIDataState())
     val uiState: StateFlow<UIDataState> = _uiState.asStateFlow()
 
@@ -48,7 +45,7 @@ class ListViewModel(
                 }
                 val result = repo.getAllCharacters(page = page.intValue)
                 _uiState.update { characterResponse ->
-                    characterResponse.copy(character = result.toEntity(), loading = false)
+                    characterResponse.copy(character = result.toEntity().results, loading = false)
                 }
             } catch (e: Exception) {
                 _uiState.update { state ->
@@ -76,7 +73,7 @@ class ListViewModel(
 
                 if (page.intValue > 1) {
                     val result = repo.getAllCharacters(page = page.intValue)
-                    appendNewItems(result.toEntity())
+                    appendNewItems(result.toEntity().results)
                 }
                 _uiState.update { state ->
                     state.copy(loading = false)
@@ -85,10 +82,10 @@ class ListViewModel(
         }
     }
 
-    private fun appendNewItems(items: CharacterResponse) {
-        val currentList = ArrayList(this.character.value)
-        currentList.addAll(listOf(items))
-        this.character.value = currentList
+    private fun appendNewItems(items: List<Character>) {
+        val currentList = ArrayList(this._uiState.value.character)
+        currentList.addAll(items)
+        this._uiState.update { it.copy(character = currentList) }
     }
 
     private fun incrementPage() {
