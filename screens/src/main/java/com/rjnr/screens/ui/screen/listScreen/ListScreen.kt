@@ -26,7 +26,7 @@ fun ListScreen(screen: ListScreen) {
     val page = viewModel.page.intValue
     val loading = viewModel.loading.value
     val character = viewModel.character.value
-    Log.i("item size", "position:${character.size}")
+
     val nav = navigation()
     onScreenStart {
         viewModel.start()
@@ -65,7 +65,7 @@ fun List(
 
                     if ((index + 1) >= (page * PAGE_SIZE) && !loading) {
                         viewModel.nextPage()
-                        Log.i("item size", "position:${character.size}")
+                        Log.i("item size", "next page size:${character.size}")
                     }
                     ListView(uiState = item)
                 }

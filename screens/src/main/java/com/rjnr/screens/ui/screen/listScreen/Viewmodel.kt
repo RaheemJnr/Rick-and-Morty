@@ -10,6 +10,7 @@ import com.rjnr.navigation.Navigation
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.Character
+import com.rjnr.screens.ui.domain.Location
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class ListViewModel(
     private val repo: Repo = RepoImpl(),
 ) : ViewModel() {
 
-    val page = mutableIntStateOf(1)
+    val page = mutableIntStateOf(0)
     val character: MutableState<List<Character>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(true)
     private var itemListScrollPosition = 0
@@ -82,7 +83,7 @@ class ListViewModel(
     private fun appendNewItems(items: List<Character>) {
         val currentList = ArrayList(character.value)
         currentList.addAll(items)
-        character.value = currentList
+        character.value + currentList
     }
 
     private fun incrementPage() {
