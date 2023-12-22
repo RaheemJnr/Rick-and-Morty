@@ -1,5 +1,4 @@
-object Versions {
-}
+object Versions
 
 object Libs {
     // const val androidGradlePlugin = "com.android.tools.build:gradle:7.2.1"
@@ -40,7 +39,6 @@ object Libs {
             val androidx_ui_test by lazy { "androidx.compose.ui:ui-test-junit4" }
             val androidx_ui_tooling_test by lazy { "androidx.compose.ui:ui-tooling" }
             val androidx_ui_test_manifest by lazy { "androidx.compose.ui:ui-test-manifest" }
-
         }
     }
 }

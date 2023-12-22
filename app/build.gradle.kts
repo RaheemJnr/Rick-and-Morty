@@ -25,7 +25,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -58,7 +58,7 @@ dependencies {
 
     implementation(Libs.AndroidX.androidx_core)
     implementation(Libs.AndroidX.androidx_lifecycle_runtime)
-    //compose
+    // compose
     implementation(Libs.AndroidX.Compose.activity_compose)
     implementation(platform(Libs.AndroidX.Compose.compose_bom))
     implementation(Libs.AndroidX.Compose.compose_ui)
@@ -66,7 +66,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.compose_preview)
     implementation(Libs.AndroidX.Compose.compose_material3)
     implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
-    //test
+    // test
     testImplementation(Libs.AndroidX.Test.junit)
     androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
     androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
