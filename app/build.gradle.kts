@@ -56,7 +56,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":screens"))
 
-    implementation(Libs.AndroidX.androidx_core)
+    implementation(libs.androidx.core.ktx)
     implementation(Libs.AndroidX.androidx_lifecycle_runtime)
     // compose
     implementation(Libs.AndroidX.Compose.activity_compose)
