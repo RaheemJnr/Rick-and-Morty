@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin)
+    alias(libs.plugins.jetbrains.serialization) version "1.8.10"
 }
 
 android {

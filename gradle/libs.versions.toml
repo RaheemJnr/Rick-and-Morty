@@ -12,6 +12,8 @@ ktor-client-core = "2.3.6"
 ktor-serialization-kotlinx-json = "2.3.5"
 lifecycle-runtime-ktx = "2.6.2"
 material = "1.11.0"
+androidGradlePlugin = "8.2.0"
+kotlin = "1.9.20"
 
 
 
@@ -46,3 +48,7 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+jetbrains-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
