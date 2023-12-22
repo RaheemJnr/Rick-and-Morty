@@ -13,8 +13,6 @@ ktor-serialization-kotlinx-json = "2.3.5"
 lifecycle-runtime-ktx = "2.6.2"
 material = "1.11.0"
 
-#config info
-appid = "com.rjnr.rickandmorty"
 
 
 [libraries]
@@ -29,7 +27,6 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime-ktx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 junit = { module = "junit:junit", version.ref = "junit" }
-androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui-util" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
