@@ -40,11 +40,11 @@ android {
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity.compose)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

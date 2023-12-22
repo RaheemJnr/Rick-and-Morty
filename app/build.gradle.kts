@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.rjnr.rickandmorty"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = (findProperty("android.compileSdk") as String).toInt()
 
     defaultConfig {
-        applicationId = ConfigurationData.applicationId
-        minSdk = ConfigurationData.minSdk
-        targetSdk = ConfigurationData.targetSdk
-        versionCode = ConfigurationData.versionCode
-        versionName = ConfigurationData.versionName
+        applicationId = libs.versions.appid.toString()
+        minSdk = (findProperty("android.minSdk") as String).toInt()
+        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -57,21 +57,21 @@ dependencies {
     implementation(project(":screens"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(Libs.AndroidX.androidx_lifecycle_runtime)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     // compose
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    implementation(platform(Libs.AndroidX.Compose.compose_bom))
-    implementation(Libs.AndroidX.Compose.compose_ui)
-    implementation(Libs.AndroidX.Compose.compose_ui_graphics)
-    implementation(Libs.AndroidX.Compose.compose_preview)
-    implementation(Libs.AndroidX.Compose.compose_material3)
-    implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // test
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
-    androidTestImplementation(platform(Libs.AndroidX.Test.androidx_test_bom))
-    androidTestImplementation(Libs.AndroidX.Test.androidx_ui_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_tooling_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_test_manifest)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

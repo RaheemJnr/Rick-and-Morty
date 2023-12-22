@@ -35,18 +35,17 @@ android {
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.material)
-
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     // kotlin/ktor
-    implementation(Libs.Kotlin.serialization)
-    implementation(Libs.Kotlin.ktor_core)
-    implementation(Libs.Kotlin.content_negotiation)
-    implementation(Libs.Kotlin.ktor_android_client)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.android)
 
     //test
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

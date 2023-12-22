@@ -46,11 +46,10 @@ android {
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
+    implementation(libs.androidx.core.ktx)
     //compose
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    implementation(platform(Libs.AndroidX.Compose.compose_bom))
-    implementation(Libs.AndroidX.Compose.compose_material3)
-
+    implementation(libs.androidx.activity.compose)
+    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("androidx.compose.material3:material3")
 
 }
