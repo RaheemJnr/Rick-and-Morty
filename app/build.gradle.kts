@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.rjnr.rickandmorty"
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = libs.versions.appid.toString()
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+        applicationId = "com.rjnr.rickandmorty"
+        minSdk = 26
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

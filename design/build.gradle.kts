@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.design"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
 
@@ -20,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -47,9 +47,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    //compose
+    // compose
     implementation(libs.androidx.activity.compose)
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.material3:material3")
-
 }

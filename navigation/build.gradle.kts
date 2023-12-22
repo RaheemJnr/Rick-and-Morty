@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.rjnr.navigation"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
 
@@ -18,7 +18,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
