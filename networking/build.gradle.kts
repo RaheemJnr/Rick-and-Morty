@@ -1,15 +1,15 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
 }
 
 android {
     namespace = "com.rjnr.networking"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
-        minSdk = ConfigurationData.minSdk
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -20,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -35,18 +35,17 @@ android {
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.material)
-
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     // kotlin/ktor
-    implementation(Libs.Kotlin.serialization)
-    implementation(Libs.Kotlin.ktor_core)
-    implementation(Libs.Kotlin.content_negotiation)
-    implementation(Libs.Kotlin.ktor_android_client)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.android)
 
-    //test
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
+    // test
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -5,20 +5,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import com.rjnr.navigation.navigation
 
-
 @SuppressLint("ComposableNaming")
 @Composable
 fun onScreenStart(
     cleanUp: () -> Unit = {},
-    start: () -> Unit
+    start: () -> Unit,
 ) {
     DisposableEffect(navigation().currentScreen) {
         start()
         onDispose { cleanUp() }
     }
 }
+<<<<<<< HEAD
+=======
 
 
 class UiWrapperImpl() : UiWrapper() {
 
 }
+>>>>>>> master
