@@ -1,4 +1,4 @@
-package com.rjnr.screens.ui.screen.detailScreen
+package com.rjnr.screens.ui.screen.detail
 
 import android.util.Log
 import androidx.activity.compose.BackHandler
@@ -25,12 +25,26 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
     val viewModel: BaseViewModel = viewModel()
     Log.i("detailScreen", "screen number: ${screen.id}")
     val navigation = navigation()
+<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
     onScreenStart {
         viewModel.getCharacterDetails(screen.id)
+=======
+    Details(modifier = modifier, navigation)
+
+    BackHandler {
+        navigation.onBackPressed()
+>>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
     }
 
+<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
     val details by viewModel.singleCharacter
     Log.i("detailScreen", "screen number: $details")
+=======
+@Composable
+private fun Details(
+    modifier: Modifier,
+    navigation: Navigation,
+>>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -38,6 +52,7 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
+<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
             text = details.name,
         )
         Text(
@@ -52,6 +67,13 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
         Button(
             onClick = {
                 viewModel.getCharacterDetails(screen.id)
+=======
+            text = "Hi, this is the details screen",
+        )
+        Button(
+            onClick = {
+                navigation.onBackPressed()
+>>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
             },
         ) {
             Text(
@@ -60,6 +82,7 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
             )
         }
     }
+<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
 
     BackHandler {
         navigation.onBackPressed()
@@ -73,4 +96,6 @@ private fun Details(
     character: Character,
 
 ) {
+=======
+>>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
 }

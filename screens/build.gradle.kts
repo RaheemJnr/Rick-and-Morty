@@ -48,6 +48,7 @@ android {
 dependencies {
 
     implementation(project(":navigation"))
+    implementation(project(":design"))
 
     implementation(project(":networking"))
 

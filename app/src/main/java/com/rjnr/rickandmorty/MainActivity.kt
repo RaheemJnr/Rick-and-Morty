@@ -3,21 +3,23 @@ package com.rjnr.rickandmorty
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.design.ui.RickAndMortyTheme
-import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
-import com.rjnr.navigation.navigation
+import com.rjnr.navigation.OnboardingScreen
+import com.rjnr.screens.ui.screen.composeExt.IScreenWrapper
+import com.rjnr.screens.ui.screen.composeExt.RMUIWrapper
+import com.rjnr.screens.ui.screen.composeExt.ScreenWrapper
+import com.rjnr.screens.ui.screen.composeExt.UiWrapper
+import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 
 class MainActivity : ComponentActivity() {
+
+    private val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +33,9 @@ class MainActivity : ComponentActivity() {
             }
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    navigation.navigateTo(ListScreen)
+
+                RMUIWrapper(screenWrapper = createScreenWrapper(context = wrapper)) {
+                    navigation.navigateTo(OnboardingScreen)
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
@@ -43,6 +43,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    // Function to create an IScreenWrapper with a given UiWrapper context
+    private fun createScreenWrapper(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
+        override fun uiWrapper(): UiWrapper = context
     }
 }
 
