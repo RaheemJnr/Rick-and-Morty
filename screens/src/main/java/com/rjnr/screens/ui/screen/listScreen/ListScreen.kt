@@ -65,7 +65,6 @@ fun List(
 
                     if ((index + 1) >= (page * PAGE_SIZE) && !loading) {
                         viewModel.nextPage()
-                        Log.i("item size", "next page size:${character.size}")
                     }
                     ListView(uiState = item)
                 }

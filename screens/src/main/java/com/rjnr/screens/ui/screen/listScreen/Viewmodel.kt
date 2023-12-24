@@ -41,12 +41,11 @@ class ListViewModel(
             loading.value = true
             try {
                 val result = repo.getAllCharacters(page = 1)
-                Log.i("first page number", "pageNumber:${page.intValue}")
                 character.value = result.toEntity().results
-                Log.i("emitting data", ":${result.toEntity().info}")
                 loading.value = false
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())
+                loading.value = false
             }
         }
 
@@ -58,12 +57,8 @@ class ListViewModel(
             // check if scroll position (20 at the start) + 1  is greater than
             // page * Page size(20 at the start) if true fetch new data
             if (itemListScrollPosition + 1 >= (page.intValue * PAGE_SIZE)) {
-                Log.i("scroll position1", "position:$itemListScrollPosition")
-                // add loading to true
                 loading.value = true
                 incrementPage()
-                Log.i("emitting data", "pageNumber:${page.intValue}")
-
                 if (page.intValue > 1) {
                     try {
                         val result = repo.getAllCharacters(page = page.intValue)
@@ -91,6 +86,5 @@ class ListViewModel(
 
     fun onChangeItemScrollPosition(position: Int) {
         itemListScrollPosition = position
-        Log.i("scroll position", "position:$position")
     }
 }
