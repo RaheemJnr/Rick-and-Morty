@@ -3,16 +3,11 @@ package com.rjnr.rickandmorty
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.design.ui.RickAndMortyTheme
-import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
 import com.rjnr.navigation.OnboardingScreen
@@ -24,7 +19,7 @@ import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 
 class MainActivity : ComponentActivity() {
 
-    val wrapper: UiWrapper = UiWrapperImpl()
+    private val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +37,8 @@ class MainActivity : ComponentActivity() {
                 RMUIWrapper(screenWrapper = createScreenWrapper(context = wrapper)) {
                     navigation.navigateTo(OnboardingScreen)
 
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background,
-                    ) {
-                        navigation.navigateTo(ListScreen)
-
-                        NavigationRoot(navigation = navigation) { screen ->
-                            NavGraph(screen = screen)
-                        }
+                    NavigationRoot(navigation = navigation) { screen ->
+                        NavGraph(screen = screen)
                     }
                 }
             }

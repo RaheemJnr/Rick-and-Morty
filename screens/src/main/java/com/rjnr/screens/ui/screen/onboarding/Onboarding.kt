@@ -54,9 +54,8 @@ import kotlin.math.roundToInt
 
 enum class ScreenState {
     SHOW_BUTTON,
-    NO_SHOW
+    NO_SHOW,
 }
-
 
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Composable
@@ -64,7 +63,7 @@ fun OnboardingScreen(
     screen: Screen,
     modifier: Modifier = Modifier,
 
-    ) {
+) {
     val navigation = navigation()
     var screenState: ScreenState by remember { mutableStateOf(ScreenState.NO_SHOW) }
 
@@ -74,14 +73,14 @@ fun OnboardingScreen(
 
     val transition = updateTransition(
         targetState = if (!switchBetweenState) ScreenState.SHOW_BUTTON else screenState,
-        label = "Splash"
+        label = "Splash",
     )
 
     val percentTransition by transition.animateFloat(
         transitionSpec = {
             springBounceSlow()
         },
-        label = "percentTransition"
+        label = "percentTransition",
     ) {
         when (it) {
             ScreenState.NO_SHOW -> 0f
@@ -93,7 +92,7 @@ fun OnboardingScreen(
         transitionSpec = {
             springBounceSlow()
         },
-        label = "logoHeight"
+        label = "logoHeight",
     ) {
         when (it) {
             ScreenState.NO_SHOW -> 96.dp
@@ -105,7 +104,7 @@ fun OnboardingScreen(
         transitionSpec = {
             springBounceSlow()
         },
-        label = "logoWidth"
+        label = "logoWidth",
     ) {
         when (it) {
             ScreenState.NO_SHOW -> 113.dp
@@ -117,7 +116,7 @@ fun OnboardingScreen(
         transitionSpec = {
             springBounceSlow()
         },
-        label = "spacerTop"
+        label = "spacerTop",
     ) {
         when (it) {
             ScreenState.NO_SHOW -> {
@@ -131,7 +130,7 @@ fun OnboardingScreen(
         transitionSpec = {
             springBounceSlow()
         },
-        label = "marginTextTop"
+        label = "marginTextTop",
     ) {
         when (it) {
             ScreenState.NO_SHOW -> 64.dp
@@ -152,59 +151,58 @@ fun OnboardingScreen(
             .systemBarsPadding()
             .navigationBarsPadding(),
     ) {
-        Column(
-
-        ) {
+        Column() {
             Spacer(Modifier.height(spacerTop))
-            Row(modifier = modifier
-                .wrapContentSize()
-                .layout { measurable, constraints ->
-                    val placeable = measurable.measure(constraints)
-                    val xSplash = (wrapper.screenWidth!! / 2f) - (placeable.width / 2)
-                    val xLogin = 204.dp.toPx()
+            Row(
+                modifier = modifier
+                    .wrapContentSize()
+                    .layout { measurable, constraints ->
+                        val placeable = measurable.measure(constraints)
+                        val xSplash = (wrapper.screenWidth!! / 2f) - (placeable.width / 2)
+                        val xLogin = 204.dp.toPx()
 
-                    layout(placeable.width, placeable.height) {
-                        placeable.placeRelative(
-                            x = lerp(start = xSplash, xLogin, percentTransition).roundToInt(),
-                            y = 0,
-                        )
+                        layout(placeable.width, placeable.height) {
+                            placeable.placeRelative(
+                                x = lerp(start = xSplash, xLogin, percentTransition).roundToInt(),
+                                y = 0,
+                            )
+                        }
                     }
-                }
-                .noRippleClickable {
-                    switchBetweenState = !switchBetweenState
-                }
+                    .noRippleClickable {
+                        switchBetweenState = !switchBetweenState
+                    },
             ) {
                 Image(
                     modifier = modifier
                         .padding(bottom = 78.dp, end = 12.dp)
                         .size(
                             width = logoWidth,
-                            height = logoWidth
+                            height = logoWidth,
                         )
                         .clip(CircleShape),
                     painter = painterResource(id = R.drawable.rick),
                     contentScale = ContentScale.FillBounds,
                     contentDescription = "Rick sanchez",
 
-                    )
+                )
                 Text(
                     modifier = modifier
                         .padding(top = 72.dp),
                     text = "&",
                     style = MaterialTheme.typography.displaySmall,
 
-                    )
+                )
                 Image(
                     modifier = modifier
                         .padding(top = 78.dp, start = 8.dp)
                         .size(
                             width = logoWidth,
-                            height = logoWidth
+                            height = logoWidth,
                         )
                         .clip(shape = CircleShape),
                     painter = painterResource(id = R.drawable.morty),
                     contentScale = ContentScale.FillBounds,
-                    contentDescription = "Morty"
+                    contentDescription = "Morty",
                 )
             }
             Spacer(Modifier.height(marginTextTop))
@@ -212,24 +210,21 @@ fun OnboardingScreen(
                 modifier = modifier
                     .animateXCenterToLeft(
                         wrapper = wrapper,
-                        percentTransition = percentTransition
+                        percentTransition = percentTransition,
                     ),
                 softWrap = true,
                 text = "Welcome to the Rick and Morty Character App",
                 fontWeight = FontWeight.ExtraBold,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
             )
-
         }
         NavButton(
             navigation = navigation,
             modifier = modifier,
-            percentTransition = percentTransition
+            percentTransition = percentTransition,
         )
     }
-
 }
-
 
 @Composable
 private fun NavButton(
@@ -249,11 +244,11 @@ private fun NavButton(
                     .padding(horizontal = 32.dp),
                 onClick = {
                     navigation.navigateTo(ListScreen)
-                }
+                },
             ) {
                 Text(
                     text = "Explore",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
                 )
             }
             Spacer(Modifier.weight(3f))
@@ -261,7 +256,6 @@ private fun NavButton(
         }
     }
 }
-
 
 @RequiresApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 @Preview(showBackground = true)
@@ -272,5 +266,4 @@ fun OnboardPrev() {
             OnboardingScreen(screen = it)
         }
     }
-
 }

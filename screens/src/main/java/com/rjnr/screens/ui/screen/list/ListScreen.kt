@@ -32,24 +32,22 @@ fun List(navigation: Navigation) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = " Hi, List Screen",
-            style = MaterialTheme.typography.headlineLarge
+            style = MaterialTheme.typography.headlineLarge,
         )
 
         Button(
             onClick = {
                 navigation.navigateTo(DetailScreen)
-            }
+            },
         ) {
             Text(
                 text = "Move to next screen",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }
-
-
 }
