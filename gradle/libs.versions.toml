@@ -14,6 +14,7 @@ lifecycle-runtime-ktx = "2.6.2"
 material = "1.11.0"
 androidGradlePlugin = "8.2.0"
 kotlin = "1.9.20"
+detekt = "1.23.3"
 
 
 
@@ -52,3 +53,4 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 jetbrains-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
