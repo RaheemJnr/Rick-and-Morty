@@ -1,11 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin)
 }
 
 android {
     namespace = "com.rjnr.design"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
 
@@ -20,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -46,11 +46,9 @@ android {
 
 dependencies {
 
-    implementation(Libs.AndroidX.androidx_core)
-    //compose
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    implementation(platform(Libs.AndroidX.Compose.compose_bom))
-    implementation(Libs.AndroidX.Compose.compose_material3)
-
-
+    implementation(libs.androidx.core.ktx)
+    // compose
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material3)
 }

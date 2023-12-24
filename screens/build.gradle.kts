@@ -1,11 +1,12 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
 }
 
 android {
     namespace = "com.rjnr.screens"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = 34
 
     defaultConfig {
 
@@ -35,7 +36,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -49,27 +50,27 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":design"))
 
-    implementation(Libs.AndroidX.androidx_core)
-    implementation(Libs.AndroidX.androidx_lifecycle_runtime)
-    // compose
-    implementation(Libs.AndroidX.Compose.activity_compose)
-    implementation(platform(Libs.AndroidX.Compose.compose_bom))
-    implementation(Libs.AndroidX.Compose.compose_ui)
-    implementation(Libs.AndroidX.Compose.compose_ui_graphics)
-    implementation(Libs.AndroidX.Compose.compose_preview)
-    implementation(Libs.AndroidX.Compose.compose_material3)
-    // lifecycle
-    implementation(Libs.AndroidX.Compose.compose_viewmodel_lifecycle)
-    // coil image
-    implementation("io.coil-kt:coil-compose:2.5.0")
-
     implementation(project(":networking"))
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    // compose
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // coil image
+    implementation(libs.coil.compose)
+
     // test
-    testImplementation(Libs.AndroidX.Test.junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_junit)
-    androidTestImplementation(Libs.AndroidX.Test.androidx_espresso_core)
-    androidTestImplementation(platform(Libs.AndroidX.Test.androidx_test_bom))
-    androidTestImplementation(Libs.AndroidX.Test.androidx_ui_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_tooling_test)
-    debugImplementation(Libs.AndroidX.Test.androidx_ui_test_manifest)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.testManifest)
 }
