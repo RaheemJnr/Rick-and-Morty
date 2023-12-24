@@ -9,12 +9,13 @@ espresso-core = "3.5.1"
 junit = "4.13.2"
 ktor-client-android = "2.3.5"
 ktor-client-core = "2.3.6"
-ktor-serialization-kotlinx-json = "2.3.5"
+ktor-serialization = "2.3.5"
 lifecycle-runtime-ktx = "2.6.2"
 material = "1.11.0"
 androidGradlePlugin = "8.2.0"
 kotlin = "1.9.20"
 detekt = "1.23.3"
+serialization = "1.9.20"
 
 
 
@@ -45,12 +46,12 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor-client-android" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-client-android" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-serialization-kotlinx-json" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-serialization" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 jetbrains-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

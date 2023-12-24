@@ -37,4 +37,3 @@ data class LocationDTO(
     val name: String,
     val url: String,
 )
-
