@@ -16,11 +16,5 @@ fun onScreenStart(
         onDispose { cleanUp() }
     }
 }
-<<<<<<< HEAD
-=======
 
-
-class UiWrapperImpl() : UiWrapper() {
-
-}
->>>>>>> master
+class UiWrapperImpl() : UiWrapper()
