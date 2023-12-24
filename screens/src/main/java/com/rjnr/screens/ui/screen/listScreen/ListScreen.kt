@@ -33,7 +33,7 @@ fun ListScreen(screen: ListScreen) {
     }
     List(
         navigation = nav,
-        viewModel = ListViewModel(),
+        viewModel = viewModel,
         page = page,
         loading = loading,
         character = character,

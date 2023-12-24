@@ -10,7 +10,6 @@ import com.rjnr.navigation.Navigation
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.Character
-import com.rjnr.screens.ui.domain.Location
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.launch
 
@@ -81,9 +80,9 @@ class ListViewModel(
     }
 
     private fun appendNewItems(items: List<Character>) {
-        val currentList = ArrayList(character.value)
+        val currentList = ArrayList(this.character.value)
         currentList.addAll(items)
-        character.value + currentList
+        this.character.value = currentList
     }
 
     private fun incrementPage() {
