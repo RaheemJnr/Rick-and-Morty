@@ -1,4 +1,4 @@
-package com.rjnr.screens.ui.screen.listScreen
+package com.rjnr.screens.ui.screen.viewModel
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rjnr.navigation.Navigation
+import com.rjnr.networking.model.CharacterDTO
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.Character
@@ -20,13 +21,14 @@ const val PAGE_SIZE = 20
 //    val character: List<Character> = ArrayList(),
 // )
 
-class ListViewModel(
+class BaseViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),
 ) : ViewModel() {
 
     val page = mutableIntStateOf(0)
     val character: MutableState<List<Character>> = mutableStateOf(ArrayList())
+    val singleCharacter = mutableStateOf(CharacterDTO().toEntity())
     val loading = mutableStateOf(true)
     private var itemListScrollPosition = 0
 //    private val _uiState = MutableStateFlow(UIDataState())
@@ -50,6 +52,14 @@ class ListViewModel(
         }
 
         // nav.onBackPressed[screen]
+    }
+
+    fun getCharacterDetails(id: Int) {
+        viewModelScope.launch {
+            val result = repo.getSingleCharacter(id)
+            Log.i("viewmodel", "screen number: $result")
+            singleCharacter.value = result.toEntity()
+        }
     }
 
     fun nextPage() {

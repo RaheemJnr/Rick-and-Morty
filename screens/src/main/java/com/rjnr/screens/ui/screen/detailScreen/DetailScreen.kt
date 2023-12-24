@@ -1,5 +1,6 @@
 package com.rjnr.screens.ui.screen.detailScreen
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,17 +9,57 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
+import com.rjnr.screens.ui.domain.Character
+import com.rjnr.screens.ui.screen.composeExt.onScreenStart
+import com.rjnr.screens.ui.screen.viewModel.BaseViewModel
 
 @Composable
 fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
+    val viewModel: BaseViewModel = viewModel()
+    Log.i("detailScreen", "screen number: ${screen.id}")
     val navigation = navigation()
-    Details(modifier = modifier, navigation)
+    onScreenStart {
+        viewModel.getCharacterDetails(screen.id)
+    }
 
+    val details by viewModel.singleCharacter
+    Log.i("detailScreen", "screen number: $details")
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = details.name,
+        )
+        Text(
+            text = "${details.id}",
+        )
+        Text(
+            text = details.gender,
+        )
+        Text(
+            text = details.species,
+        )
+        Button(
+            onClick = {
+                viewModel.getCharacterDetails(screen.id)
+            },
+        ) {
+            Text(
+                text = "Move to List screen",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
 
     BackHandler {
         navigation.onBackPressed()
@@ -28,28 +69,8 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
 @Composable
 private fun Details(
     modifier: Modifier,
-    navigation: Navigation
+    navigation: Navigation,
+    character: Character,
 
 ) {
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Hi, this is the details screen"
-        )
-        Button(
-            onClick = {
-                navigation.onBackPressed()
-            }
-        ) {
-
-            Text(
-                text = "Move to List screen",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-    }
-
 }

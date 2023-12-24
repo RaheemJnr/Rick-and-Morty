@@ -18,22 +18,22 @@ data class InfoDTO(
 
 @Serializable
 data class CharacterDTO(
-    val id: Int,
-    val name: String,
-    val status: String,
-    val species: String,
-    val type: String,
-    val gender: String,
-    val origin: LocationDTO,
-    val location: LocationDTO,
-    val image: String,
-    val episode: List<String>,
-    val url: String,
-    val created: String,
+    val id: Int? = null,
+    val name: String? = null,
+    val status: String? = null,
+    val species: String? = null,
+    val type: String? = null,
+    val gender: String? = null,
+    val origin: LocationDTO? = null,
+    val location: LocationDTO? = null,
+    val image: String? = null,
+    val episode: List<String>? = listOf(),
+    val url: String? = null,
+    val created: String? = null,
 )
 
 @Serializable
 data class LocationDTO(
-    val name: String,
-    val url: String,
+    val name: String? = null,
+    val url: String? = null,
 )

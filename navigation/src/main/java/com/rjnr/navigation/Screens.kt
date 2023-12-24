@@ -1,5 +1,5 @@
 package com.rjnr.navigation
 
-object ListScreen : Screen
+data object ListScreen : Screen
 
-object DetailScreen : Screen
+data class DetailScreen(val id: Int) : Screen

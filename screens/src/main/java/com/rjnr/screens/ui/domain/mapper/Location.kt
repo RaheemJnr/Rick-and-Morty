@@ -5,7 +5,7 @@ import com.rjnr.screens.ui.domain.Location
 
 fun LocationDTO.toEntity(): Location {
     return Location(
-        name = name,
-        url = url,
+        name = name ?: "",
+        url = url ?: "",
     )
 }
