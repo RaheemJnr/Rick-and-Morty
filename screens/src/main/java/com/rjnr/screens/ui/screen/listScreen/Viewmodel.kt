@@ -62,11 +62,9 @@ class ListViewModel(
                 if (page.intValue > 1) {
                     try {
                         val result = repo.getAllCharacters(page = page.intValue)
-                        Log.i("emitting data", "${page.intValue}")
                         appendNewItems(result.toEntity().results)
-                        Log.i("emitting data", "${result.toEntity()}")
                     } catch (e: Exception) {
-                        Log.e("emitting failure data", e.toString())
+                        loading.value = false
                     }
                 }
                 loading.value = false
