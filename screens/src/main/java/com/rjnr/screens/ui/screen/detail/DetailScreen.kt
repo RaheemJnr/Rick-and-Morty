@@ -1,8 +1,4 @@
-<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
 package com.rjnr.screens.ui.screen.detail
-=======
-package com.rjnr.screens.ui.screen.detailScreen
->>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +19,6 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
     val navigation = navigation()
     Details(modifier = modifier, navigation)
 
-
     BackHandler {
         navigation.onBackPressed()
     }
@@ -32,28 +27,26 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
 @Composable
 private fun Details(
     modifier: Modifier,
-    navigation: Navigation
+    navigation: Navigation,
 
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Hi, this is the details screen"
+            text = "Hi, this is the details screen",
         )
         Button(
             onClick = {
                 navigation.onBackPressed()
-            }
+            },
         ) {
-
             Text(
                 text = "Move to List screen",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }
-
 }
