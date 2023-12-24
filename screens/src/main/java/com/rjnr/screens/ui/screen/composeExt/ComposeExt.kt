@@ -17,3 +17,8 @@ fun onScreenStart(
         onDispose { cleanUp() }
     }
 }
+
+
+class UiWrapperImpl() : UiWrapper() {
+
+}

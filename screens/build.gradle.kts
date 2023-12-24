@@ -47,6 +47,7 @@ android {
 dependencies {
 
     implementation(project(":navigation"))
+    implementation(project(":design"))
 
     implementation(Libs.AndroidX.androidx_core)
     implementation(Libs.AndroidX.androidx_lifecycle_runtime)
