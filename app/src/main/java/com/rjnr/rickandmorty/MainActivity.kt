@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity() {
     val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContent {
             val navigation = Navigation()
@@ -34,8 +33,16 @@ class MainActivity : ComponentActivity() {
             }
             RickAndMortyTheme {
                 // A surface container using the 'background' color from the theme
+<<<<<<< HEAD
                 RMUIWrapper(screenWrapper = createScreenWrapper(context = wrapper)) {
                     navigation.navigateTo(OnboardingScreen)
+=======
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
+                    navigation.navigateTo(ListScreen)
+>>>>>>> master
 
                     NavigationRoot(navigation = navigation) { screen ->
                         NavGraph(screen = screen)
@@ -46,13 +53,15 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+<<<<<<< HEAD
 }
 
 // Function to create an IScreenWrapper with a given UiWrapper context
 fun createScreenWrapper(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
     override fun uiWrapper(): UiWrapper = context
+=======
+>>>>>>> master
 }
-
 
 @Preview(showBackground = true)
 @Composable

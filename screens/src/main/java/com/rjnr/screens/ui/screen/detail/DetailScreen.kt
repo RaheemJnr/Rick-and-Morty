@@ -1,4 +1,8 @@
+<<<<<<< HEAD:screens/src/main/java/com/rjnr/screens/ui/screen/detail/DetailScreen.kt
 package com.rjnr.screens.ui.screen.detail
+=======
+package com.rjnr.screens.ui.screen.detailScreen
+>>>>>>> master:screens/src/main/java/com/rjnr/screens/ui/screen/detailScreen/DetailScreen.kt
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
