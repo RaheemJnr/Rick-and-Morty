@@ -2,6 +2,7 @@ package com.rjnr.screens.ui.screen.detail
 
 import android.util.Log
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +39,10 @@ fun DetailScreen(modifier: Modifier = Modifier, screen: DetailScreen) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Canvas(
+            modifier = modifier,
+        ) {
+        }
         Text(
             text = details.name,
         )
