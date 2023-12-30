@@ -70,6 +70,7 @@ fun List(
                     }
                     ListView(uiState = item) {
                         navigation.navigateTo(DetailScreen(index + 1))
+                        viewModel.getCharacterDetails(index + 1)
                         Log.i("detailScreen", "index number :$index")
                     }
                 }
