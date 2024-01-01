@@ -12,17 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
-import com.rjnr.screens.ui.screen.viewModel.BaseViewModel
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
     screen: DetailScreen,
 ) {
-    val viewModel = BaseViewModel(navigation())
+    val viewModel: DetailsViewModel = viewModel()
     Log.i("detailScreen", "screen number: ${screen.id}")
     val navigation = navigation()
     onScreenStart {

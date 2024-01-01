@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,12 +21,11 @@ import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
-import com.rjnr.screens.ui.screen.viewModel.BaseViewModel
-import com.rjnr.screens.ui.screen.viewModel.PAGE_SIZE
+import com.rjnr.screens.ui.screen.detail.PAGE_SIZE
 
 @Composable
 fun ListScreen(screen: ListScreen) {
-    val viewModel: BaseViewModel = viewModel()
+    val viewModel: ListViewModel = viewModel()
     val page = viewModel.page.intValue
     val loading = viewModel.loading.value
     val character = viewModel.character.value
@@ -48,7 +46,7 @@ fun ListScreen(screen: ListScreen) {
 @Composable
 fun List(
     navigation: Navigation,
-    viewModel: BaseViewModel,
+    viewModel: ListViewModel,
     page: Int,
     loading: Boolean,
     character: List<Character>,
@@ -58,13 +56,6 @@ fun List(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Button(
-            onClick = {
-                viewModel.getCharacterDetails(9)
-            },
-        ) {
-            Text(text = "Hi, this is the details screen")
-        }
         LazyColumn() {
             if (loading && character.isEmpty()) {
                 item {
@@ -78,7 +69,6 @@ fun List(
                     }
                     ListView(uiState = item) {
                         navigation.navigateTo(DetailScreen(index + 1))
-                        viewModel.getCharacterDetails(index + 1)
                         Log.i("detailScreen", "index number :$index")
                     }
                 }
