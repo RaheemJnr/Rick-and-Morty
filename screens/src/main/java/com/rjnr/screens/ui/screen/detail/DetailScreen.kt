@@ -21,7 +21,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     screen: DetailScreen,
 ) {
-    val viewModel: DetailsViewModel = viewModel()
+    val viewModel = DetailsViewModel()
     Log.i("detailScreen", "screen number: ${screen.id}")
     val navigation = navigation()
     onScreenStart {
