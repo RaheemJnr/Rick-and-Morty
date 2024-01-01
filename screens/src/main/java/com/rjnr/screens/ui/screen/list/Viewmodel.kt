@@ -11,9 +11,9 @@ import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
-import com.rjnr.screens.ui.screen.detail.PAGE_SIZE
 import kotlinx.coroutines.launch
 
+const val PAGE_SIZE = 20
 class ListViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),

@@ -11,12 +11,7 @@ import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.launch
 
-const val PAGE_SIZE = 20
 
-// data class UIDataState(
-//    val loading: Boolean = true,
-//    val character: List<Character> = ArrayList(),
-// )
 
 class DetailsViewModel(
     private val nav: Navigation = Navigation(),
@@ -38,6 +33,7 @@ class DetailsViewModel(
             try {
                 val result = repo.getSingleCharacter(id = id)
                 singleCharacter.value = result.toEntity()
+                Log.i("emitting failure data", result.toString())
                 loading.value = false
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())

@@ -21,7 +21,6 @@ import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
-import com.rjnr.screens.ui.screen.detail.PAGE_SIZE
 
 @Composable
 fun ListScreen(screen: ListScreen) {

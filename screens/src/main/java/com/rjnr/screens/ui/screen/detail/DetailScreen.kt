@@ -2,7 +2,6 @@ package com.rjnr.screens.ui.screen.detail
 
 import android.util.Log
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,11 +27,6 @@ fun DetailScreen(
     onScreenStart {
         viewModel.getCharacterDetails(screen.id)
     }
-
-    BackHandler {
-        navigation.onBackPressed()
-    }
-
     val details by viewModel.singleCharacter
     Log.i("detailScreen", "screen number: $details")
 
@@ -41,10 +35,6 @@ fun DetailScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Canvas(
-            modifier = modifier,
-        ) {
-        }
         Text(
             text = details.name,
         )
@@ -64,5 +54,9 @@ fun DetailScreen(
         ) {
             Text(text = "Hi, this is the details screen")
         }
+    }
+
+    BackHandler {
+        navigation.onBackPressed()
     }
 }
