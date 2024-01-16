@@ -21,7 +21,6 @@ import com.rjnr.screens.ui.screen.composeExt.UiWrapper
 import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 import kotlin.math.roundToInt
 
-
 // Composable function to execute a block of code within the current Density scope
 @Composable
 fun <T> densityScope(densityScope: @Composable Density.() -> T): T {
@@ -38,8 +37,7 @@ fun Float.toDensityDp() = densityScope { toDp() }
 @Composable
 fun Dp.toDensityPx() = densityScope { toPx() }
 
-
-//amination used for the shared element
+// amination used for the shared element
 fun <T> springBounceSlow() = spring<T>(
     dampingRatio = 0.75f,
     stiffness = Spring.StiffnessVeryLow,
@@ -63,7 +61,7 @@ fun Modifier.animateXCenterToLeft(
 
             placeable.placeRelative(
                 x = lerp(xSplash, xLogin, percentTransition).roundToInt(),
-                y = 0
+                y = 0,
             )
         }
     }
@@ -78,11 +76,12 @@ fun wrapperContext(): UiWrapper {
 fun wrapperCtx(): UiWrapperImpl = wrapperContext() as UiWrapperImpl
 
 inline fun Modifier.noRippleClickable(
-    crossinline onClick: () -> Unit
+    crossinline onClick: () -> Unit,
 ): Modifier = composed {
     clickable(
         indication = null,
-        interactionSource = remember { MutableInteractionSource() }) {
+        interactionSource = remember { MutableInteractionSource() },
+    ) {
         onClick()
     }
 }
