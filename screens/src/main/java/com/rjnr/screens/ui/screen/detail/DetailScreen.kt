@@ -1,6 +1,5 @@
 package com.rjnr.screens.ui.screen.detail
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
@@ -22,14 +20,11 @@ fun DetailScreen(
     screen: DetailScreen,
 ) {
     val viewModel = DetailsViewModel()
-    Log.i("detailScreen", "screen number: ${screen.id}")
     val navigation = navigation()
     onScreenStart {
         viewModel.getCharacterDetails(screen.id)
     }
     val details by viewModel.singleCharacter
-    Log.i("detailScreen", "screen number: $details")
-
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

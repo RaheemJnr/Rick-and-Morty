@@ -77,7 +77,6 @@ val dark_onCustomColor1 = Color(0xFF580065)
 val dark_CustomColor1Container = Color(0xFF7C008E)
 val dark_onCustomColor1Container = Color(0xFFFFD6FD)
 
-
 val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -109,7 +108,6 @@ val LightColors = lightColorScheme(
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
 )
-
 
 val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,

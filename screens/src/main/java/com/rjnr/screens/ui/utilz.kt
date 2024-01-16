@@ -11,11 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.ColorUtils
 import com.rjnr.screens.ui.screen.composeExt.LocalRMContext
 import com.rjnr.screens.ui.screen.composeExt.UiWrapper
 import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
@@ -85,3 +90,6 @@ inline fun Modifier.noRippleClickable(
         onClick()
     }
 }
+
+fun findContrastTextColor(backgroundColor: Color): Color =
+    if (ColorUtils.calculateLuminance(backgroundColor.toArgb()) <= 0.5) White else Black

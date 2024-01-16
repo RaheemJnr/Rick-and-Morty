@@ -1,7 +1,6 @@
 package com.rjnr.screens.ui.screen.list
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +31,8 @@ import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
+import com.rjnr.screens.ui.findContrastTextColor
+import com.rjnr.screens.ui.noRippleClickable
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
@@ -101,12 +102,12 @@ fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 8.dp)
-            .clickable {
+            .noRippleClickable {
                 onClick()
             }
             .background(
                 shape = RoundedCornerShape(12.dp),
-                color = Theme.colors.onBackground,
+                color = Theme.colors.secondary.copy(alpha = .2f),
             ),
 
     ) {
@@ -128,7 +129,7 @@ fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
             Text(
                 text = uiState.name,
                 fontWeight = FontWeight.Bold,
-                color = Theme.colors.onBackground,
+                color = findContrastTextColor(Theme.colors.onBackground),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
@@ -137,7 +138,7 @@ fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
             Text(
                 text = uiState.gender,
                 fontWeight = FontWeight.Bold,
-                color = Theme.colors.onBackground,
+                color = findContrastTextColor(Theme.colors.onBackground),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
@@ -145,7 +146,7 @@ fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
             Text(
                 text = uiState.status,
                 fontWeight = FontWeight.Bold,
-                color = Theme.colors.onBackground,
+                color = findContrastTextColor(Theme.colors.onBackground),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
