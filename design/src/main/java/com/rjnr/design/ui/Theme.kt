@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -48,7 +47,6 @@ private val LightColors = lightColorScheme(
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
 )
-
 
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -82,14 +80,13 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
-
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Composable
 fun RickAndMortyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -112,6 +109,6 @@ fun RickAndMortyTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = RMTypography,
-        content = content
+        content = content,
     )
 }

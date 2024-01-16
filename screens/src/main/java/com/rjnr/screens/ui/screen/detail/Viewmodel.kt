@@ -11,8 +11,6 @@ import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.launch
 
-
-
 class DetailsViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),
