@@ -71,7 +71,7 @@ fun List(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LazyColumn() {
+        LazyColumn {
             if (loading && character.isEmpty()) {
                 item {
                     Loading()
@@ -97,29 +97,34 @@ fun Loading() {
 }
 
 @Composable
-fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
+fun ListView(
+    uiState: Character,
+    modifier: Modifier,
+    onClick: () -> Unit,
+) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 8.dp)
-            .noRippleClickable {
-                onClick()
-            }
-            .background(
-                shape = RoundedCornerShape(12.dp),
-                color = Theme.colors.secondary.copy(alpha = .2f),
-            ),
-
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .noRippleClickable {
+                    onClick()
+                }
+                .background(
+                    shape = RoundedCornerShape(12.dp),
+                    color = Theme.colors.secondary.copy(alpha = .2f),
+                ),
     ) {
         AsyncImage(
             model = uiState.image,
             contentDescription = "",
             contentScale = ContentScale.FillBounds,
-            modifier = modifier
-                .height(70.dp)
-                .width(70.dp)
-                .clip(shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp))
-                .clipToBounds(),
+            modifier =
+                modifier
+                    .height(70.dp)
+                    .width(70.dp)
+                    .clip(shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp))
+                    .clipToBounds(),
         )
 
         Column(
@@ -146,7 +151,7 @@ fun ListView(uiState: Character, modifier: Modifier, onClick: () -> Unit) {
             Text(
                 text = uiState.status,
                 fontWeight = FontWeight.Bold,
-                color = findContrastTextColor(Theme.colors.onBackground),
+                color = findContrastTextColor(Theme.colors.background),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,

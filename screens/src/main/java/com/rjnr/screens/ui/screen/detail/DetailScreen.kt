@@ -23,11 +23,12 @@ fun DetailScreen(
     screen: DetailScreen,
 ) {
     val viewModel = DetailsViewModel()
-    val details by viewModel.uiState.collectAsState()
     val navigation = navigation()
     onScreenStart {
         viewModel.getCharacterDetails(screen.id)
     }
+
+    val details by viewModel.uiState.collectAsState()
 
     DetailUI(modifier, details)
 
@@ -50,7 +51,6 @@ private fun DetailUI(
             text = details.name,
         )
         Log.i("Details fetched list", "$details")
-
     }
 }
 

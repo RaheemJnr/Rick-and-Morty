@@ -43,12 +43,17 @@ fun Float.toDensityDp() = densityScope { toDp() }
 fun Dp.toDensityPx() = densityScope { toPx() }
 
 // amination used for the shared element
-fun <T> springBounceSlow() = spring<T>(
-    dampingRatio = 0.75f,
-    stiffness = Spring.StiffnessVeryLow,
-)
+fun <T> springBounceSlow() =
+    spring<T>(
+        dampingRatio = 0.75f,
+        stiffness = Spring.StiffnessVeryLow,
+    )
 
-fun lerp(start: Float, end: Float, @FloatRange(from = 0.0, to = 1.0) fraction: Float): Float {
+fun lerp(
+    start: Float,
+    end: Float,
+    @FloatRange(from = 0.0, to = 1.0) fraction: Float,
+): Float {
     return (start + fraction * (end - start))
 }
 
@@ -80,16 +85,15 @@ fun wrapperContext(): UiWrapper {
 @Composable
 fun wrapperCtx(): UiWrapperImpl = wrapperContext() as UiWrapperImpl
 
-inline fun Modifier.noRippleClickable(
-    crossinline onClick: () -> Unit,
-): Modifier = composed {
-    clickable(
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() },
-    ) {
-        onClick()
+inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier =
+    composed {
+        clickable(
+            indication = null,
+            interactionSource = remember { MutableInteractionSource() },
+        ) {
+            onClick.invoke()
+        }
     }
-}
 
 fun findContrastTextColor(backgroundColor: Color): Color =
     if (ColorUtils.calculateLuminance(backgroundColor.toArgb()) <= 0.5) White else Black
