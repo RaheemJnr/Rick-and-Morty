@@ -1,16 +1,14 @@
 package com.rjnr.screens.ui.screen.list
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import androidx.compose.runtime.*
 import androidx.lifecycle.viewModelScope
 import com.rjnr.navigation.Navigation
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
+import com.rjnr.screens.ui.screen.viewModel.ComposeViewModel
 import kotlinx.coroutines.launch
 
 const val PAGE_SIZE = 20
@@ -18,16 +16,32 @@ const val PAGE_SIZE = 20
 class ListViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),
-) : ViewModel() {
-    val page = mutableIntStateOf(0)
-    val character: MutableState<List<Character>> = mutableStateOf(ArrayList())
-    val loading = mutableStateOf(true)
+) : ComposeViewModel<ListState, ListEvent>() {
+    private val page = mutableIntStateOf(0)
+    private val character: MutableState<List<Character>> = mutableStateOf(ArrayList())
+    private val loading = mutableStateOf(true)
     private var itemListScrollPosition = 0
 //    private val _uiState = MutableStateFlow(UIDataState())
 //    val uiState: StateFlow<UIDataState> = _uiState.asStateFlow()
 
+    @Composable
+    override fun uiState(): ListState {
+        return ListState(
+            page = page.intValue,
+            character = character.value,
+            loading = loading.value,
+        )
+    }
+
     init {
         start()
+    }
+
+    override fun onEvent(event: ListEvent) {
+        when (event) {
+            is ListEvent.NextPage -> nextPage()
+            is ListEvent.OnChangeItemScrollPosition -> onChangeItemScrollPosition(event.position)
+        }
     }
 
     fun start() {
@@ -44,7 +58,7 @@ class ListViewModel(
         }
     }
 
-    fun nextPage() {
+    private fun nextPage() {
         viewModelScope.launch {
             // check if scroll position (20 at the start) + 1  is greater than
             // page * Page size(20 at the start) if true fetch new data

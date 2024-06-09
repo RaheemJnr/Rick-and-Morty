@@ -14,7 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.rjnr.navigation.Screens.DetailScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
-import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
 fun DetailScreen(
@@ -24,9 +23,9 @@ fun DetailScreen(
     val viewModel = DetailsViewModel()
     val details by viewModel.uiState.collectAsState()
     val navigation = navigation()
-    onScreenStart(start = {
-        viewModel.start(screen.id)
-    })
+//    onScreenStart(start = {
+//        viewModel.start(screen.id)
+//    })
 
     // viewModel.start(screen.id)
 

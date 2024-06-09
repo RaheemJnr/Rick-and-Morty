@@ -7,11 +7,16 @@ import androidx.lifecycle.viewModelScope
 import com.rjnr.networking.model.CharacterDTO
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
+import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
+data class DetailState(
+    val character: List<Character>,
+)
 
 class DetailsViewModel(
     private val repo: Repo = RepoImpl(),
@@ -26,11 +31,11 @@ class DetailsViewModel(
         // start()
     }
 
-    fun start(id: Int) {
-        getCharacterDetails(id = id)
-    }
+//    fun start(id: Int) {
+//        getCharacterDetails(id = id)
+//    }
 
-    private fun getCharacterDetails(id: Int) {
+    fun getCharacterDetails(id: Int) {
         loading.value = true
         viewModelScope.launch {
             try {

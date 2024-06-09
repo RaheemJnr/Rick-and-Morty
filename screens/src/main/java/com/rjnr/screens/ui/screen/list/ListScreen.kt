@@ -26,27 +26,19 @@ import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.findContrastTextColor
 import com.rjnr.screens.ui.noRippleClickable
-import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
 fun ListScreen(screen: ListScreen) {
     val modifier = Modifier
     val viewModel: ListViewModel = viewModel()
-    val page = viewModel.page.intValue
-    val loading = viewModel.loading.value
-    val character = viewModel.character.value
+    val uiState: ListState = viewModel.uiState()
 
     val nav = navigation()
-    onScreenStart {
-        // viewModel.start()
-    }
     List(
         modifier = modifier,
         navigation = nav,
-        viewModel = viewModel,
-        page = page,
-        loading = loading,
-        character = character,
+        uiState = uiState,
+        onEvent = viewModel::onEvent,
     )
 }
 
@@ -54,10 +46,8 @@ fun ListScreen(screen: ListScreen) {
 fun List(
     modifier: Modifier,
     navigation: Navigation,
-    viewModel: ListViewModel,
-    page: Int,
-    loading: Boolean,
-    character: List<Character>,
+    uiState: ListState,
+    onEvent: (ListEvent) -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -65,15 +55,17 @@ fun List(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LazyColumn {
-            if (loading && character.isEmpty()) {
+            if (uiState.loading && uiState.character.isEmpty()) {
                 item {
                     Loading()
                 }
             } else {
-                itemsIndexed(character) { index, item ->
-                    viewModel.onChangeItemScrollPosition(index)
-                    if ((index + 1) >= (page * PAGE_SIZE) && !loading) {
-                        viewModel.nextPage()
+                itemsIndexed(uiState.character) { index, item ->
+                    // viewModel.onChangeItemScrollPosition(index)
+                    onEvent(ListEvent.OnChangeItemScrollPosition(index))
+                    if ((index + 1) >= (uiState.page * PAGE_SIZE) && !uiState.loading) {
+//                        viewModel.nextPage()
+                        onEvent(ListEvent.NextPage)
                     }
                     ListView(uiState = item, modifier = modifier) {
                         navigation.navigateTo(DetailScreen(index + 1))
