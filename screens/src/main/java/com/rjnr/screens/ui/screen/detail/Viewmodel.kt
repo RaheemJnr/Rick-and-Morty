@@ -2,6 +2,7 @@ package com.rjnr.screens.ui.screen.detail
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.rjnr.networking.model.CharacterDTO
@@ -14,8 +15,10 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(
     private val repo: Repo = RepoImpl(),
 ) : ComposeViewModel<DetailState, DetailEvent>() {
-    private val character = mutableStateOf(CharacterDTO())
-    private val loading = mutableStateOf(true)
+    private val _character = mutableStateOf(CharacterDTO())
+    val character: State<CharacterDTO> = _character
+    private val _loading = mutableStateOf(true)
+    val loading: State<Boolean> = _loading
 
     @Composable
     override fun uiState(): DetailState {
@@ -26,9 +29,9 @@ class DetailsViewModel(
     }
 
     override fun onEvent(event: DetailEvent) {
-        when (event) {
-            is DetailEvent.GetSingle -> getCharacterDetails(event.id)
-        }
+//        when (event) {
+//            is DetailEvent.GetSingle -> getCharacterDetails(event.id)
+//        }
     }
 
     fun start(id: Int) {
@@ -36,17 +39,17 @@ class DetailsViewModel(
     }
 
     private fun getCharacterDetails(id: Int) {
-        loading.value = true
+        _loading.value = true
         viewModelScope.launch {
             try {
                 val result = repo.getSingleCharacter(id = id)
                 // singleCharacter.value = result.toEntity()
-                character.value = result
-                loading.value = false
+                _character.value = result
+                _loading.value = false
                 Log.i("VM list", "${character.value}")
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())
-                loading.value = false
+                _loading.value = false
             }
         }
     }

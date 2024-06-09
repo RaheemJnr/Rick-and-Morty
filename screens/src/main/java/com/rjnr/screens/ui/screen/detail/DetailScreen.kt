@@ -7,24 +7,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.navigation
-import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
     screen: DetailScreen,
+    viewmodel: DetailsViewModel = viewModel(),
 ) {
-    val viewmodel = DetailsViewModel()
     val details = viewmodel.uiState()
-    val navigation = navigation()
-    onScreenStart(cleanUp = {}) {
+    LaunchedEffect(screen.id) {
         viewmodel.start(screen.id)
     }
+    val navigation = navigation()
+//    onScreenStart(cleanUp = {}) {
+//        viewmodel.start(screen.id)
+//    }
 
     DetailUI(modifier, details)
 
