@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,6 @@ import com.rjnr.navigation.Screens.DetailScreen
 import com.rjnr.navigation.Screens.ListScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
-import com.rjnr.screens.ui.findContrastTextColor
 import com.rjnr.screens.ui.noRippleClickable
 
 @Composable
@@ -61,10 +61,8 @@ fun List(
                 }
             } else {
                 itemsIndexed(uiState.character) { index, item ->
-                    // viewModel.onChangeItemScrollPosition(index)
                     onEvent(ListEvent.OnChangeItemScrollPosition(index))
                     if ((index + 1) >= (uiState.page * PAGE_SIZE) && !uiState.loading) {
-//                        viewModel.nextPage()
                         onEvent(ListEvent.NextPage)
                     }
                     ListView(uiState = item, modifier = modifier) {
@@ -119,7 +117,7 @@ fun ListView(
             Text(
                 text = uiState.name,
                 fontWeight = FontWeight.Bold,
-                color = findContrastTextColor(Theme.colors.onBackground),
+                color = contentColorFor(backgroundColor = Theme.colors.onBackground),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
@@ -128,7 +126,7 @@ fun ListView(
             Text(
                 text = uiState.gender,
                 fontWeight = FontWeight.Bold,
-                color = findContrastTextColor(Theme.colors.onBackground),
+                color = contentColorFor(backgroundColor = Theme.colors.onBackground),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
@@ -136,7 +134,7 @@ fun ListView(
             Text(
                 text = uiState.status,
                 fontWeight = FontWeight.Bold,
-                color = findContrastTextColor(Theme.colors.background),
+                color = contentColorFor(backgroundColor = Theme.colors.background),
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 style = Theme.typography.bodyLarge,
