@@ -19,7 +19,6 @@ class DetailsViewModel(
 
     @Composable
     override fun uiState(): DetailState {
-        Log.i("VM list1", "${character.value.toEntity()}")
         return DetailState(
             character = character.value.toEntity(),
             loading = loading.value,
@@ -43,7 +42,6 @@ class DetailsViewModel(
                 val result = repo.getSingleCharacter(id = id)
                 character.value = result
                 loading.value = false
-                Log.i("VM list2", "${character.value}")
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())
                 loading.value = false
