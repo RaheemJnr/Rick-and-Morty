@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.rjnr.design.ui.Theme
+import com.rjnr.navigation.DetailScreen
+import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
-import com.rjnr.navigation.Screens.DetailScreen
-import com.rjnr.navigation.Screens.ListScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.noRippleClickable

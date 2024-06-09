@@ -1,50 +1,49 @@
 package com.rjnr.screens.ui.screen.detail
 
 import android.util.Log
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rjnr.networking.model.CharacterDTO
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
-import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.rjnr.screens.ui.screen.viewModel.ComposeViewModel
 import kotlinx.coroutines.launch
-
-data class DetailState(
-    val character: List<Character>,
-)
 
 class DetailsViewModel(
     private val repo: Repo = RepoImpl(),
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(CharacterDTO())
-    val uiState: StateFlow<CharacterDTO> = _uiState.asStateFlow()
+) : ComposeViewModel<DetailState, DetailEvent>() {
+    private val character = mutableStateOf(CharacterDTO())
+    private val loading = mutableStateOf(true)
 
-    // val singleCharacter: MutableState<Character> = mutableStateOf(CharacterDTO().toEntity())
-    val loading = mutableStateOf(true)
-
-    init {
-        // start()
+    @Composable
+    override fun uiState(): DetailState {
+        Log.i("VM list", "${character.value.toEntity()}")
+        return DetailState(
+            character = character.value.toEntity(),
+        )
     }
 
-//    fun start(id: Int) {
-//        getCharacterDetails(id = id)
-//    }
+    override fun onEvent(event: DetailEvent) {
+        when (event) {
+            is DetailEvent.GetSingle -> getCharacterDetails(event.id)
+        }
+    }
 
-    fun getCharacterDetails(id: Int) {
+    fun start(id: Int) {
+        getCharacterDetails(id = id)
+    }
+
+    private fun getCharacterDetails(id: Int) {
         loading.value = true
         viewModelScope.launch {
             try {
                 val result = repo.getSingleCharacter(id = id)
                 // singleCharacter.value = result.toEntity()
-                _uiState.value = result
+                character.value = result
                 loading.value = false
-                Log.i("VMlist1", "$result")
-                Log.i("VMlist2", "${result.toEntity()}")
+                Log.i("VM list", "${character.value}")
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())
                 loading.value = false

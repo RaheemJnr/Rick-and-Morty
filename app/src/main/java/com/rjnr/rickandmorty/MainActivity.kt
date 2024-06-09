@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.design.ui.RickAndMortyTheme
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
-import com.rjnr.navigation.Screens.OnboardingScreen
+import com.rjnr.navigation.OnboardingScreen
 import com.rjnr.screens.ui.screen.composeExt.IScreenWrapper
 import com.rjnr.screens.ui.screen.composeExt.RMUIWrapper
 import com.rjnr.screens.ui.screen.composeExt.ScreenWrapper
