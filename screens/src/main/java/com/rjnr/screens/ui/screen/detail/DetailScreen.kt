@@ -16,7 +16,6 @@ import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.screen.composeExt.onScreenStart
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
