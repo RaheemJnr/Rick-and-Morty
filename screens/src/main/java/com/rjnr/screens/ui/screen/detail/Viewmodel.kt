@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.rjnr.networking.model.CharacterDTO
 import com.rjnr.networking.repo.Repo
 import com.rjnr.networking.repo.RepoImpl
-import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,23 +16,30 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(
     private val repo: Repo = RepoImpl(),
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(CharacterDTO().toEntity())
-    val uiState: StateFlow<Character> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(CharacterDTO())
+    val uiState: StateFlow<CharacterDTO> = _uiState.asStateFlow()
 
     // val singleCharacter: MutableState<Character> = mutableStateOf(CharacterDTO().toEntity())
     val loading = mutableStateOf(true)
 
-    fun start() {
+    init {
+        // start()
     }
 
-    fun getCharacterDetails(id: Int) {
+    fun start(id: Int) {
+        getCharacterDetails(id = id)
+    }
+
+    private fun getCharacterDetails(id: Int) {
         viewModelScope.launch {
             loading.value = true
             try {
                 val result = repo.getSingleCharacter(id = id)
                 // singleCharacter.value = result.toEntity()
-                _uiState.value = result.toEntity()
+                _uiState.value = result
                 loading.value = false
+                Log.i("VMlist1", "$result")
+                Log.i("VMlist2", "${result.toEntity()}")
             } catch (e: Exception) {
                 Log.e("emitting failure data", e.toString())
                 loading.value = false

@@ -22,14 +22,26 @@ fun DetailScreen(
     screen: DetailScreen,
 ) {
     val viewModel = DetailsViewModel()
-    val navigation = navigation()
-    onScreenStart {
-        viewModel.getCharacterDetails(screen.id)
-    }
-
     val details by viewModel.uiState.collectAsState()
+    val navigation = navigation()
+    onScreenStart(start = {
+        viewModel.start(screen.id)
+    })
 
-    DetailUI(modifier, details)
+    // viewModel.start(screen.id)
+
+    // DetailUI(modifier, details.toEntity())
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        details.name?.let {
+            Text(
+                text = it,
+            )
+        }
+        Log.i("listt", "$details")
+    }
 
     BackHandler {
         navigation.onBackPressed()
@@ -48,11 +60,10 @@ private fun DetailUI(
         Text(
             text = details.name,
         )
-        Log.i("Details fetched list", "$details")
+        Log.i("listt", "$details")
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPrev() {

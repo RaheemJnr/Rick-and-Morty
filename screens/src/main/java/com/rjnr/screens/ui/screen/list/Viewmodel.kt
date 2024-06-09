@@ -14,6 +14,7 @@ import com.rjnr.screens.ui.domain.mapper.toEntity
 import kotlinx.coroutines.launch
 
 const val PAGE_SIZE = 20
+
 class ListViewModel(
     private val nav: Navigation = Navigation(),
     private val repo: Repo = RepoImpl(),
@@ -70,11 +71,10 @@ class ListViewModel(
     }
 
     private fun incrementPage() {
-        page.intValue = page.intValue + 1
+        page.intValue += 1
     }
 
     fun onChangeItemScrollPosition(position: Int) {
         itemListScrollPosition = position
     }
 }
-

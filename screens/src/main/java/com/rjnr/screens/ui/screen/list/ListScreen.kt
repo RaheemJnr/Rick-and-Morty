@@ -45,7 +45,7 @@ fun ListScreen(screen: ListScreen) {
 
     val nav = navigation()
     onScreenStart {
-        viewModel.start()
+        // viewModel.start()
     }
     List(
         modifier = modifier,
