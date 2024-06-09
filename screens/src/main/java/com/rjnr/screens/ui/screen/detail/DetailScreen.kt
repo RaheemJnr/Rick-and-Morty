@@ -7,28 +7,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.navigation
+import com.rjnr.screens.ui.screen.composeExt.onScreenStart
+import com.rjnr.screens.ui.screen.list.Loading
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
     screen: DetailScreen,
-    viewmodel: DetailsViewModel = viewModel(),
+    viewmodel: DetailsViewModel = DetailsViewModel(),
 ) {
     val details = viewmodel.uiState()
-    LaunchedEffect(screen.id) {
-        viewmodel.start(screen.id)
-    }
-    val navigation = navigation()
-//    onScreenStart(cleanUp = {}) {
+//    LaunchedEffect(screen.id) {
 //        viewmodel.start(screen.id)
 //    }
+    val navigation = navigation()
+    onScreenStart {
+        viewmodel.start(screen.id)
+    }
 
     DetailUI(modifier, details)
 
@@ -41,17 +41,20 @@ fun DetailScreen(
 @Composable
 private fun DetailUI(
     modifier: Modifier,
-    details: DetailState,
+    uiState: DetailState,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
+        if (uiState.loading) {
+            Loading()
+        }
         Text(
-            text = details.character.name,
+            text = uiState.character.name,
         )
-        Log.i("listt", "${details.character}")
+        Log.i("listt", "${uiState.character}")
     }
 }
 
