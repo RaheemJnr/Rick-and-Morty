@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rjnr.design.ui.RickAndMortyTheme
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.NavigationRoot
-import com.rjnr.navigation.OnboardingScreen
+import com.rjnr.navigation.Screens.OnboardingScreen
 import com.rjnr.screens.ui.screen.composeExt.IScreenWrapper
 import com.rjnr.screens.ui.screen.composeExt.RMUIWrapper
 import com.rjnr.screens.ui.screen.composeExt.ScreenWrapper
@@ -18,7 +18,6 @@ import com.rjnr.screens.ui.screen.composeExt.UiWrapper
 import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 
 class MainActivity : ComponentActivity() {
-
     private val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +45,10 @@ class MainActivity : ComponentActivity() {
     }
 
     // Function to create an IScreenWrapper with a given UiWrapper context
-    private fun createScreenWrapper(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
-        override fun uiWrapper(): UiWrapper = context
-    }
+    private fun createScreenWrapper(context: UiWrapper): IScreenWrapper =
+        object : ScreenWrapper() {
+            override fun uiWrapper(): UiWrapper = context
+        }
 }
 
 @Preview(showBackground = true)

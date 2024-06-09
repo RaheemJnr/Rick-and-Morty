@@ -31,8 +31,8 @@ class DetailsViewModel(
     }
 
     private fun getCharacterDetails(id: Int) {
+        loading.value = true
         viewModelScope.launch {
-            loading.value = true
             try {
                 val result = repo.getSingleCharacter(id = id)
                 // singleCharacter.value = result.toEntity()

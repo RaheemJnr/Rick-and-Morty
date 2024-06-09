@@ -1,14 +1,7 @@
 package com.rjnr.screens.ui.screen.list
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.rjnr.design.ui.Theme
-import com.rjnr.navigation.DetailScreen
-import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
+import com.rjnr.navigation.Screens.DetailScreen
+import com.rjnr.navigation.Screens.ListScreen
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
 import com.rjnr.screens.ui.findContrastTextColor
