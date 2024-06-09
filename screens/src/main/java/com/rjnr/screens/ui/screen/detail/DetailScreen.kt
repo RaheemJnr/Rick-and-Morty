@@ -37,7 +37,6 @@ fun DetailScreen(
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun DetailUI(
     modifier: Modifier,
