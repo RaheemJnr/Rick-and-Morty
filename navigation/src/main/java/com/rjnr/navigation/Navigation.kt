@@ -11,7 +11,7 @@ class Navigation() {
     var currentScreen: Screen? by mutableStateOf(null)
         private set
 
-    val onBackPressed: MutableMap<Screen, () -> Boolean> = mutableMapOf()
+    private val onBackPressed: MutableMap<Screen, () -> Boolean> = mutableMapOf()
 
     private val backStack: Stack<Screen> = Stack()
     var lastScreen: Screen? = null

@@ -21,8 +21,6 @@ class ListViewModel(
     private val character: MutableState<List<Character>> = mutableStateOf(ArrayList())
     private val loading = mutableStateOf(true)
     private var itemListScrollPosition = 0
-//    private val _uiState = MutableStateFlow(UIDataState())
-//    val uiState: StateFlow<UIDataState> = _uiState.asStateFlow()
 
     @Composable
     override fun uiState(): ListState {
