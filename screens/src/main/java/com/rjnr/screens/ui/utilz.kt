@@ -11,16 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.ColorUtils
 import com.rjnr.screens.ui.screen.composeExt.LocalRMContext
 import com.rjnr.screens.ui.screen.composeExt.UiWrapper
 import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 import kotlin.math.roundToInt
-
 
 // Composable function to execute a block of code within the current Density scope
 @Composable
@@ -38,14 +42,18 @@ fun Float.toDensityDp() = densityScope { toDp() }
 @Composable
 fun Dp.toDensityPx() = densityScope { toPx() }
 
+// amination used for the shared element
+fun <T> springBounceSlow() =
+    spring<T>(
+        dampingRatio = 0.75f,
+        stiffness = Spring.StiffnessVeryLow,
+    )
 
-//amination used for the shared element
-fun <T> springBounceSlow() = spring<T>(
-    dampingRatio = 0.75f,
-    stiffness = Spring.StiffnessVeryLow,
-)
-
-fun lerp(start: Float, end: Float, @FloatRange(from = 0.0, to = 1.0) fraction: Float): Float {
+fun lerp(
+    start: Float,
+    end: Float,
+    @FloatRange(from = 0.0, to = 1.0) fraction: Float,
+): Float {
     return (start + fraction * (end - start))
 }
 
@@ -63,7 +71,7 @@ fun Modifier.animateXCenterToLeft(
 
             placeable.placeRelative(
                 x = lerp(xSplash, xLogin, percentTransition).roundToInt(),
-                y = 0
+                y = 0,
             )
         }
     }
@@ -77,12 +85,15 @@ fun wrapperContext(): UiWrapper {
 @Composable
 fun wrapperCtx(): UiWrapperImpl = wrapperContext() as UiWrapperImpl
 
-inline fun Modifier.noRippleClickable(
-    crossinline onClick: () -> Unit
-): Modifier = composed {
-    clickable(
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() }) {
-        onClick()
+inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier =
+    composed {
+        clickable(
+            indication = null,
+            interactionSource = remember { MutableInteractionSource() },
+        ) {
+            onClick.invoke()
+        }
     }
-}
+
+fun findContrastTextColor(backgroundColor: Color): Color =
+    if (ColorUtils.calculateLuminance(backgroundColor.toArgb()) <= 0.5) White else Black

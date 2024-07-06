@@ -1,18 +1,16 @@
 package com.rjnr.navigation
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.compositionLocalOf
 
-@SuppressLint("ComposeCompositionLocalUsage")
 private val localNavigation = compositionLocalOf<Navigation> { error("No Local Navigation") }
 
 @Composable
 fun NavigationRoot(
     navigation: Navigation,
-    navGraph: @Composable (screen: Screen?) -> Unit
+    navGraph: @Composable (screen: Screen?) -> Unit,
 ) {
     CompositionLocalProvider(
         localNavigation provides navigation,
@@ -29,7 +27,6 @@ fun NavigationRoot(
         navGraph(navigation.currentScreen)
     }
 }
-
 
 @Composable
 fun navigation(): Navigation {

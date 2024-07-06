@@ -14,16 +14,11 @@ fun NavGraph(screen: Screen?) {
     when (screen) {
         null -> {
         }
-        is OnboardingScreen -> {
-            OnboardingScreen(screen = screen)
-        }
 
-        is ListScreen -> {
-            ListScreen(screen = screen)
-        }
+        is OnboardingScreen -> OnboardingScreen(screen = screen)
 
-        is DetailScreen -> {
-            DetailScreen(screen = screen)
-        }
+        is ListScreen -> ListScreen(screen = screen)
+
+        is DetailScreen -> DetailScreen(screen = screen)
     }
 }

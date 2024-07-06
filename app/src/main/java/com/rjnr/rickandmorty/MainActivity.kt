@@ -18,7 +18,6 @@ import com.rjnr.screens.ui.screen.composeExt.UiWrapper
 import com.rjnr.screens.ui.screen.composeExt.UiWrapperImpl
 
 class MainActivity : ComponentActivity() {
-
     private val wrapper: UiWrapper = UiWrapperImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +45,10 @@ class MainActivity : ComponentActivity() {
     }
 
     // Function to create an IScreenWrapper with a given UiWrapper context
-    private fun createScreenWrapper(context: UiWrapper): IScreenWrapper = object : ScreenWrapper() {
-        override fun uiWrapper(): UiWrapper = context
-    }
+    private fun createScreenWrapper(context: UiWrapper): IScreenWrapper =
+        object : ScreenWrapper() {
+            override fun uiWrapper(): UiWrapper = context
+        }
 }
 
 @Preview(showBackground = true)

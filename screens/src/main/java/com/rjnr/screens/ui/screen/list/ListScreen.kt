@@ -1,77 +1,72 @@
 package com.rjnr.screens.ui.screen.list
 
-import android.util.Log
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.rjnr.design.ui.Theme
 import com.rjnr.navigation.DetailScreen
 import com.rjnr.navigation.ListScreen
 import com.rjnr.navigation.Navigation
 import com.rjnr.navigation.navigation
 import com.rjnr.screens.ui.domain.Character
-import com.rjnr.screens.ui.screen.composeExt.onScreenStart
-import com.rjnr.screens.ui.screen.viewModel.BaseViewModel
-import com.rjnr.screens.ui.screen.viewModel.PAGE_SIZE
+import com.rjnr.screens.ui.noRippleClickable
 
 @Composable
 fun ListScreen(screen: ListScreen) {
-    val viewModel: BaseViewModel = viewModel()
-    val page = viewModel.page.intValue
-    val loading = viewModel.loading.value
-    val character = viewModel.character.value
+    val modifier = Modifier
+    val viewModel: ListViewModel = viewModel()
+    val uiState: ListState = viewModel.uiState()
 
     val nav = navigation()
-    onScreenStart {
-        viewModel.start()
-    }
     List(
+        modifier = modifier,
         navigation = nav,
-        viewModel = viewModel,
-        page = page,
-        loading = loading,
-        character = character,
+        uiState = uiState,
+        onEvent = viewModel::onEvent,
     )
 }
 
 @Composable
 fun List(
+    modifier: Modifier,
     navigation: Navigation,
-    viewModel: BaseViewModel,
-    page: Int,
-    loading: Boolean,
-    character: List<Character>,
+    uiState: ListState,
+    onEvent: (ListEvent) -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LazyColumn() {
-            if (loading && character.isEmpty()) {
+        LazyColumn {
+            if (uiState.loading && uiState.character.isEmpty()) {
                 item {
                     Loading()
                 }
             } else {
-                itemsIndexed(character) { index, item ->
-                    viewModel.onChangeItemScrollPosition(index)
-                    if ((index + 1) >= (page * PAGE_SIZE) && !loading) {
-                        viewModel.nextPage()
+                itemsIndexed(uiState.character) { index, item ->
+                    onEvent(ListEvent.OnChangeItemScrollPosition(index))
+                    if ((index + 1) >= (uiState.page * PAGE_SIZE) && !uiState.loading) {
+                        onEvent(ListEvent.NextPage)
                     }
-                    ListView(uiState = item) {
+                    ListView(uiState = item, modifier = modifier) {
                         navigation.navigateTo(DetailScreen(index + 1))
-                        viewModel.getCharacterDetails(index + 1)
-                        Log.i("detailScreen", "index number :$index")
                     }
                 }
             }
@@ -85,20 +80,65 @@ fun Loading() {
 }
 
 @Composable
-fun ListView(uiState: Character, onClick: () -> Unit) {
+fun ListView(
+    uiState: Character,
+    modifier: Modifier,
+    onClick: () -> Unit,
+) {
     Row(
-        modifier = Modifier.fillMaxSize().clickable { onClick() },
-
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .noRippleClickable {
+                    onClick()
+                }
+                .background(
+                    shape = RoundedCornerShape(12.dp),
+                    color = Theme.colors.secondary.copy(alpha = .2f),
+                ),
     ) {
         AsyncImage(
             model = uiState.image,
             contentDescription = "",
+            contentScale = ContentScale.FillBounds,
+            modifier =
+                modifier
+                    .height(70.dp)
+                    .width(70.dp)
+                    .clip(shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp))
+                    .clipToBounds(),
         )
 
-        Column {
-            Text(text = uiState.name)
+        Column(
+            modifier = modifier.padding(start = 6.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = uiState.name,
+                fontWeight = FontWeight.Bold,
+                color = contentColorFor(backgroundColor = Theme.colors.onBackground),
+                modifier = Modifier,
+                textAlign = TextAlign.Center,
+                style = Theme.typography.bodyLarge,
+            )
 
-            Text(text = uiState.gender)
+            Text(
+                text = uiState.gender,
+                fontWeight = FontWeight.Bold,
+                color = contentColorFor(backgroundColor = Theme.colors.onBackground),
+                modifier = Modifier,
+                textAlign = TextAlign.Center,
+                style = Theme.typography.bodyLarge,
+            )
+            Text(
+                text = uiState.status,
+                fontWeight = FontWeight.Bold,
+                color = contentColorFor(backgroundColor = Theme.colors.background),
+                modifier = Modifier,
+                textAlign = TextAlign.Center,
+                style = Theme.typography.bodyLarge,
+            )
         }
     }
 }
